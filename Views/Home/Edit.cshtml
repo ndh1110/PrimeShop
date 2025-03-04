@@ -1,0 +1,83 @@
+@model _1298_DUYHUNG.Models.Product
+@{
+    ViewData["Title"] = "Chỉnh Sửa Sản Phẩm";
+}
+
+<h2 class="neon-text">Chỉnh Sửa Sản Phẩm</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Tên Sản Phẩm</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Price" class="control-label">Giá</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageUrl" class="control-label">URL Hình Ảnh</label>
+        <input asp-for="ImageUrl" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Mô Tả</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-neon">Lưu Thay Đổi</button>
+        <a asp-action="Index" class="btn btn-secondary">Quay Lại</a>
+    </div>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<style>
+    .neon-text {
+        color: #00FF00;
+        text-shadow: 0 0 10px #00FF00;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        background-color: #2A2A2A;
+        color: #FFFFFF;
+        border: 1px solid #00FF00;
+        border-radius: 5px;
+    }
+
+    .btn-neon {
+        background-color: #00FF00;
+        border: none;
+        color: #000000;
+        padding: 10px 20px;
+        font-weight: bold;
+        border-radius: 12px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-neon:hover {
+        background-color: #FFFFFF;
+        box-shadow: 0 0 10px #00FF00;
+    }
+
+    .btn-secondary {
+        background-color: #555;
+        border: none;
+        color: #FFFFFF;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
+    .text-danger {
+        color: #FF0000;
+    }
+</style>

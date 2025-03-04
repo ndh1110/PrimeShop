@@ -1,0 +1,168 @@
+﻿@model IEnumerable<_1298_DUYHUNG.Models.Product>
+@{
+    ViewData["Title"] = "Sản Phẩm";
+}
+<section class="py-2">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="neon-text">Danh Sách Sản Phẩm</h2>
+        <div class="mb-3">
+            <a asp-action="Create" class="btn btn-neon">Thêm Sản Phẩm Mới</a>
+        </div>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="product-list">
+            @foreach (var item in Model)
+            {
+                <div class="col mb-5">
+                    <div class="product-card">
+                        <img src="@item.ImageUrl" class="card-img-top" alt="@item.Name" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                            <p>@item.Description</p>
+                            <div class="d-flex justify-content-center">
+                                <span>Giá: </span>
+                                <p class="mx-3">@item.Price.ToString("#,##0") USD</p>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-neon mr-2">Sửa</a>
+                                <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="loading" style="display: none; text-align: center;">
+            <p>Đang tải...</p>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        let page = 1;
+        let isLoading = false;
+        let hasMore = true;
+
+        // Hàm kiểm tra khi người dùng cuộn đến cuối trang
+        window.addEventListener('scroll', () => {
+            if (isLoading || !hasMore) return;
+
+            // Kiểm tra nếu người dùng cuộn đến gần cuối trang
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+                page++;
+                loadMoreProducts();
+            }
+        });
+
+        // Hàm tải thêm sản phẩm qua AJAX
+        function loadMoreProducts() {
+            isLoading = true;
+            document.getElementById('loading').style.display = 'block';
+
+            fetch(`/Home/GetProducts?page=${page}`)
+                .then(response => response.json())
+                .then(products => {
+                    isLoading = false;
+                    document.getElementById('loading').style.display = 'none';
+
+                    if (products.length === 0) {
+                        hasMore = false;
+                        return;
+                    }
+
+                    const productList = document.getElementById('product-list');
+                    products.forEach(item => {
+                        const productHtml = `
+                            <div class="col mb-5">
+                                <div class="product-card">
+                                    <img src="${item.imageUrl}" class="card-img-top" alt="${item.name}" style="height: 200px; object-fit: cover;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${item.name}</h5>
+                                        <p>${item.description}</p>
+                                        <div class="d-flex justify-content-center">
+                                            <span>Giá: </span>
+                                            <p class="mx-3">${item.price.toLocaleString()} USD</p>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="/Home/Edit/${item.id}" class="btn btn-neon mr-2">Sửa</a>
+                                            <form action="/Home/Delete/${item.id}" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        productList.insertAdjacentHTML('beforeend', productHtml);
+                    });
+                })
+                .catch(error => {
+                    isLoading = false;
+                    document.getElementById('loading').style.display = 'none';
+                    console.error('Error loading products:', error);
+                });
+        }
+    </script>
+}
+
+<style>
+    .neon-text {
+        color: #00FF00;
+        text-shadow: 0 0 10px #00FF00;
+    }
+
+    .product-card {
+        background-color: #2A2A2A;
+        border: 1px solid #00FF00;
+        border-radius: 5px;
+        padding: 10px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 15px #00FF00;
+    }
+
+    .product-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .product-card .card-title {
+        color: #00FF00;
+        margin: 10px 0;
+    }
+
+    .product-card p {
+        color: #FFFFFF;
+        margin-bottom: 10px;
+    }
+
+    .btn-neon {
+        background-color: #00FF00;
+        border: none;
+        color: #000000;
+        padding: 10px 20px;
+        font-weight: bold;
+        border-radius: 12px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        margin-right: 10px;
+    }
+
+    .btn-neon:hover {
+        background-color: #FFFFFF;
+        box-shadow: 0 0 10px #00FF00;
+    }
+
+    .btn-danger {
+        background-color: #FF0000;
+        border: none;
+        color: #FFFFFF;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+</style>
