@@ -1,29 +1,95 @@
+@model _1298_DUYHUNG.Models.Product
 @{
     ViewData["Title"] = "Trang Chủ";
 }
-<section class="py-2">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="main-content">
-            <h2 class="neon-text">Chào mừng đến với Hưng - Razer!</h2>
-            <p>Khám phá các sản phẩm công nghệ cao cấp từ Razer với thiết kế hiện đại và hiệu năng vượt trội. Hãy bắt đầu hành trình của bạn ngay hôm nay!</p>
-            <a asp-controller="Home" asp-action="Index" class="btn btn-neon">Xem Sản Phẩm</a>
+<section class="hero-section">
+    <div class="main-content">
+        <div class="text-content">
+            <h2 class="neon-text">HƯNG | RAZER</h2>
+            <p class="tagline">GAMING IN STYLE</p>
+        </div>
+        <div class="action-buttons">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-razer">Xem Sản Phẩm</a>
         </div>
     </div>
 </section>
 
 <style>
+    .hero-section {
+        /* Đặt chiều cao bằng 100% chiều cao viewport trừ chiều cao header và footer */
+        /* Giả sử header cao khoảng 70px và footer cao khoảng 100px */
+        height: calc(100vh - 70px - 100px);
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/banner_trang_chu.jpg') no-repeat center center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 0;
+        padding: 0 5px; /* Tạo khoảng cách 5px ở hai bên (banner đã rộng gần sát mép) */
+        position: relative;
+        box-sizing: border-box;
+    }
+
     .main-content {
-        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%; /* Bỏ giới hạn chiều rộng để banner kéo rộng */
         text-align: center;
     }
 
-    .main-content h2 {
-        font-size: 2.5em;
-        margin-bottom: 20px;
+    .text-content {
+        position: absolute;
+        top: 18%; /* Tăng từ 35% lên 40% để dòng chữ di chuyển xuống gần logo hơn */
+        transform: translateY(-50%);
     }
 
-    .main-content p {
-        font-size: 1.2em;
-        margin-bottom: 30px;
+    .main-content h2 {
+        font-size: 3em;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
     }
+
+    .main-content .tagline {
+        font-size: 1.5em;
+        margin-bottom: 0;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        letter-spacing: 1px;
+    }
+
+    .action-buttons {
+        position: absolute;
+        bottom: 10%; /* Giảm từ 15% xuống 10% để nút di chuyển xuống xa logo hơn */
+        transform: translateY(50%);
+    }
+
+    .btn-razer {
+        background-color: #00FF00;
+        border: 2px solid #00FF00;
+        color: #000000;
+        padding: 10px 25px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-razer:hover {
+        background-color: transparent;
+        color: #00FF00;
+        box-shadow: 0 0 10px #00FF00;
+    }
+
+    .neon-text {
+        color: #00FF00;
+        text-shadow: 0 0 10px #00FF00;
+    }
+    
 </style>

@@ -17,10 +17,7 @@
                         <div class="card-body">
                             <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
                             <p>@item.Description</p>
-                            <div class="d-flex justify-content-center">
-                                <span>Giá: </span>
-                                <p class="mx-3">@item.Price.ToString("#,##0") USD</p>
-                            </div>
+                            <p class="price">@item.Price.ToString("#,##0") USD</p>
                             <div class="d-flex justify-content-center">
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-neon mr-2">Sửa</a>
                                 <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
@@ -44,18 +41,14 @@
         let isLoading = false;
         let hasMore = true;
 
-        // Hàm kiểm tra khi người dùng cuộn đến cuối trang
         window.addEventListener('scroll', () => {
             if (isLoading || !hasMore) return;
-
-            // Kiểm tra nếu người dùng cuộn đến gần cuối trang
             if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
                 page++;
                 loadMoreProducts();
             }
         });
 
-        // Hàm tải thêm sản phẩm qua AJAX
         function loadMoreProducts() {
             isLoading = true;
             document.getElementById('loading').style.display = 'block';
@@ -80,10 +73,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">${item.name}</h5>
                                         <p>${item.description}</p>
-                                        <div class="d-flex justify-content-center">
-                                            <span>Giá: </span>
-                                            <p class="mx-3">${item.price.toLocaleString()} USD</p>
-                                        </div>
+                                        <p class="price">${item.price.toLocaleString()} USD</p>
                                         <div class="d-flex justify-content-center">
                                             <a href="/Home/Edit/${item.id}" class="btn btn-neon mr-2">Sửa</a>
                                             <form action="/Home/Delete/${item.id}" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
@@ -140,6 +130,11 @@
     .product-card p {
         color: #FFFFFF;
         margin-bottom: 10px;
+    }
+
+    .product-card .price {
+        font-weight: bold;
+        color: #FFFFFF;
     }
 
     .btn-neon {

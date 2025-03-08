@@ -29,6 +29,11 @@ body {
 }
 
 /* Trang Chủ */
+/* Thêm quy tắc cho banner */
+.banner {
+    height: 60vh; /* Tăng chiều cao của banner từ 50vh (hoặc giá trị cũ) lên 60vh */
+}
+
 .main-content {
     padding: 40px;
     text-align: center;
@@ -192,7 +197,7 @@ nav ul li a:hover {
 .footer {
     background-color: #000000;
     color: #FFFFFF;
-    padding: 20px;
+    padding: 5px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     text-align: center;

@@ -36,11 +36,20 @@
                 </div>
             </nav>
         </header>
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
+
+        @if (ViewContext.RouteData.Values["Action"].ToString() == "Home" && ViewContext.RouteData.Values["Controller"].ToString() == "Home")
+        {
+            @RenderBody() <!-- Hiển thị banner đầy đủ chiều rộng trên trang chủ -->
+        }
+        else
+        {
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @RenderBody() <!-- Các trang khác vẫn sử dụng container -->
+                </main>
+            </div>
+        }
+
         <footer class="footer">
             <div class="container">
                 <div class="footer-content">
