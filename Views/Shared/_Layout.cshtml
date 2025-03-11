@@ -37,15 +37,15 @@
             </nav>
         </header>
 
-        @if (ViewContext.RouteData.Values["Action"].ToString() == "Home" && ViewContext.RouteData.Values["Controller"].ToString() == "Home")
+        @if (ViewContext?.RouteData?.Values["Action"]?.ToString() == "Home" && ViewContext?.RouteData?.Values["Controller"]?.ToString() == "Home")
         {
-            @RenderBody() <!-- Hiển thị banner đầy đủ chiều rộng trên trang chủ -->
+            @RenderBody()
         }
         else
         {
             <div class="container">
                 <main role="main" class="pb-3">
-                    @RenderBody() <!-- Các trang khác vẫn sử dụng container -->
+                    @RenderBody()
                 </main>
             </div>
         }
