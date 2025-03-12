@@ -31,6 +31,16 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Chính Sách Bảo Mật</a>
                             </li>
+                            @if (Context.Session.GetString("User") != null)
+                            {
+                                <p>Xin chào, @Context.Session.GetString("User")</p>
+                                <a href="/Account/Logout">Đăng xuất</a>
+                            }
+                            else
+                            {
+                                <a href="/Account/Login">Đăng nhập</a>
+                            }
+
                         </ul>
                     </div>
                 </div>
