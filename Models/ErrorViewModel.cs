@@ -1,8 +1,9 @@
-namespace _1298_DuyHung.Models;
-
-public class ErrorViewModel
+namespace _1298_DUYHUNG.Models
 {
-    public string? RequestId { get; set; }
+    public class ErrorViewModel
+    {
+        public string RequestId { get; set; } = string.Empty;
 
-    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+    }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization; // Thêm dòng này
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,6 @@ namespace _1298_DUYHUNG.Controllers
     {
         private readonly AppDbContext _context;
 
-        // Inject AppDbContext qua constructor
         public HomeController(AppDbContext context)
         {
             _context = context;
@@ -23,7 +23,6 @@ namespace _1298_DUYHUNG.Controllers
 
         public IActionResult Index()
         {
-            // Lấy 5 sản phẩm đầu tiên từ database
             var initialProducts = _context.Products.Take(5).ToList();
             return View(initialProducts);
         }
@@ -31,23 +30,21 @@ namespace _1298_DUYHUNG.Controllers
         [HttpGet]
         public IActionResult GetProducts(int page = 1, int pageSize = 5)
         {
-            // Bỏ qua các sản phẩm đã hiển thị và lấy pageSize sản phẩm tiếp theo
             var products = _context.Products
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
-
             return Json(products);
         }
 
-        // Action để hiển thị form thêm sản phẩm
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // Action để xử lý thêm sản phẩm
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(Product product)
         {
             if (ModelState.IsValid)
@@ -59,7 +56,7 @@ namespace _1298_DUYHUNG.Controllers
             return View(product);
         }
 
-        // Action để hiển thị form chỉnh sửa sản phẩm
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             var product = _context.Products.FirstOrDefault(p => p.Id == id);
@@ -70,8 +67,8 @@ namespace _1298_DUYHUNG.Controllers
             return View(product);
         }
 
-        // Action để xử lý chỉnh sửa sản phẩm
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Product product)
         {
             if (ModelState.IsValid)
@@ -81,7 +78,6 @@ namespace _1298_DUYHUNG.Controllers
                 {
                     return NotFound();
                 }
-                // Cập nhật thông tin sản phẩm
                 existingProduct.Name = product.Name;
                 existingProduct.Price = product.Price;
                 existingProduct.ImageUrl = product.ImageUrl;
@@ -92,8 +88,8 @@ namespace _1298_DUYHUNG.Controllers
             return View(product);
         }
 
-        // Action để xóa sản phẩm
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             var product = _context.Products.FirstOrDefault(p => p.Id == id);
@@ -104,6 +100,17 @@ namespace _1298_DUYHUNG.Controllers
             _context.Products.Remove(product);
             _context.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [AllowAnonymous]
+        public IActionResult Details(int id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
         }
 
         public IActionResult Privacy()

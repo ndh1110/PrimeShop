@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hung\\thuchangLTWeb\\1298_DuyHung.csproj": {}
+    "C:\\Users\\Hung\\thucHangLTWeb\\1298_DuyHung.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hung\\thuchangLTWeb\\1298_DuyHung.csproj": {
+    "C:\\Users\\Hung\\thucHangLTWeb\\1298_DuyHung.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hung\\thuchangLTWeb\\1298_DuyHung.csproj",
+        "projectUniqueName": "C:\\Users\\Hung\\thucHangLTWeb\\1298_DuyHung.csproj",
         "projectName": "1298_DuyHung",
-        "projectPath": "C:\\Users\\Hung\\thuchangLTWeb\\1298_DuyHung.csproj",
+        "projectPath": "C:\\Users\\Hung\\thucHangLTWeb\\1298_DuyHung.csproj",
         "packagesPath": "C:\\Users\\Hung\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hung\\thuchangLTWeb\\obj\\",
+        "outputPath": "C:\\Users\\Hung\\thucHangLTWeb\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -53,6 +53,10 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

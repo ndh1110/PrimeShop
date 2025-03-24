@@ -1,17 +1,30 @@
+@model RegisterViewModel
+
 @{
     ViewData["Title"] = "Đăng Ký";
 }
 
-<h2>Đăng Ký</h2>
-<form method="post">
-    <input type="text" name="username" placeholder="Tên đăng nhập" required />
-    <input type="email" name="email" placeholder="Email" required />
-    <input type="password" name="password" placeholder="Mật khẩu" required />
-
-    <!-- hCaptcha -->
-    <div class="h-captcha" data-sitekey="b23a10a4-ca04-4944-bde6-32dad76c9b2c"></div>
-
-    <button type="submit">Đăng ký</button>
-</form>
+<div class="register-container">
+    <div class="razor-card">
+        <h2 class="neon-text">Đăng Ký</h2>
+        <form asp-action="Register" asp-controller="Account" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="UserName" class="form-control" placeholder="Tên đăng nhập" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" class="form-control" type="password" placeholder="Mật khẩu" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="h-captcha" data-sitekey="b23a10a4-ca04-4944-bde6-32dad76c9b2c"></div>
+            <button type="submit" class="btn btn-razer">Đăng Ký</button>
+        </form>
+    </div>
+</div>
 
 <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
