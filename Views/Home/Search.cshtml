@@ -1,0 +1,51 @@
+@model IEnumerable<_1298_DUYHUNG.Models.Product>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<_1298_DUYHUNG.Models.User> SignInManager
+@inject UserManager<_1298_DUYHUNG.Models.User> UserManager
+
+@{
+    ViewData["Title"] = "Kết Quả Tìm Kiếm";
+    bool isAdmin = User.Identity.IsAuthenticated && User.IsInRole("Admin");
+}
+
+<section class="py-2">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="neon-text">Kết Quả Tìm Kiếm</h2>
+        @if (Model.Any())
+        {
+            <div class="product-grid">
+                @foreach (var item in Model)
+                {
+                    <div class="product-card">
+                        <img src="@item.ImageUrl" class="product-image" alt="@item.Name">
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
+                                <p class="description">@item.Description</p>
+                                <p class="price">@item.Price.ToString("#,##0") USD</p>
+                            </div>
+                            <div class="button-group">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Xem</a>
+                                <a asp-controller="Home" asp-action="AddToCart" asp-route-id="@item.Id" asp-route-quantity="1" class="btn btn-success">Thêm vào giỏ</a>
+                                @if (isAdmin)
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Sửa</a>
+                                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-center" style="color: #cccccc;">Không tìm thấy sản phẩm nào.</p>
+        }
+        <div class="text-center mt-4">
+            <a asp-action="Index" class="btn btn-neon">Quay Lại Danh Sách Sản Phẩm</a>
+        </div>
+    </div>
+</section>

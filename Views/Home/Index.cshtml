@@ -30,6 +30,7 @@
                         </div>
                         <div class="button-group">
                             <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Xem</a>
+                            <a asp-controller="Home" asp-action="AddToCart" asp-route-id="@item.Id" asp-route-quantity="1" class="btn btn-success">Thêm vào giỏ</a>
                             @if (isAdmin)
                             {
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Sửa</a>
@@ -46,6 +47,12 @@
             <p>Đang tải...</p>
         </div>
     </div>
+
+    <!-- Nút "Sản phẩm miễn phí" ở góc phải màn hình (chỉ hiển thị cho tài khoản thường) -->
+    @if (!isAdmin)
+    {
+        <button id="free-product-button" class="btn btn-success free-button" onmouseover="moveButton(this)">Sản phẩm miễn phí</button>
+    }
 </section>
 
 @section Scripts {
@@ -80,7 +87,10 @@
 
                     const productList = document.getElementById('product-list');
                     products.forEach(item => {
-                        let buttonsHtml = `<a href="/Home/Details/${item.id}" class="btn btn-info">Xem</a>`;
+                        let buttonsHtml = `
+                            <a href="/Home/Details/${item.id}" class="btn btn-info">Xem</a>
+                            <a href="/Home/AddToCart/${item.id}?quantity=1" class="btn btn-success">Thêm vào giỏ</a>
+                        `;
                         if (isAdmin) {
                             buttonsHtml += `
                                 <a href="/Home/Edit/${item.id}" class="btn btn-success">Sửa</a>
@@ -96,7 +106,7 @@
                                     <div class="product-details">
                                         <h5>${item.name}</h5>
                                         <p class="description">${item.description}</p>
-                                        <p class="price">${item.price.toLocaleString()} USD</p>
+                                        <p class="price">${item.price.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} USD</p>
                                     </div>
                                     <div class="button-group">
                                         ${buttonsHtml}
@@ -112,6 +122,22 @@
                     document.getElementById('loading').style.display = 'none';
                     console.error('Error loading products:', error);
                 });
+        }
+
+        // Hàm di chuyển nút "Sản phẩm miễn phí" khi rê chuột vào
+        function moveButton(button) {
+            // Lấy kích thước của cửa sổ trình duyệt
+            const maxX = window.innerWidth - button.offsetWidth - 20; // Trừ đi chiều rộng của nút và padding
+            const maxY = window.innerHeight - button.offsetHeight - 20; // Trừ đi chiều cao của nút và padding
+
+            // Tính toán vị trí ngẫu nhiên mới trên toàn màn hình
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+
+            // Đặt vị trí mới cho nút
+            button.style.position = 'fixed';
+            button.style.left = newX + 'px';
+            button.style.top = newY + 'px';
         }
     </script>
 }

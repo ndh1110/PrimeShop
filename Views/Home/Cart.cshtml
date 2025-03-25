@@ -1,0 +1,234 @@
+@model List<_1298_DUYHUNG.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Giỏ Hàng";
+}
+
+<section class="py-2">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="neon-text">Giỏ Hàng</h2>
+        @if (Model.Any())
+        {
+            <form id="cart-form" asp-controller="Home" asp-action="UpdateCart" method="post">
+                <div class="cart-header d-flex align-items-center mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="select-all" onchange="toggleSelectAll(this)">
+                        <label class="form-check-label neon-text" for="select-all">Chọn tất cả (@Model.Count sản phẩm)</label>
+                    </div>
+                    <button type="button" class="btn btn-danger ms-auto" onclick="deleteSelected()">Xóa đã chọn</button>
+                </div>
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Sản Phẩm</th>
+                            <th>Giá</th>
+                            <th>Số Lượng</th>
+                            <th>Tổng</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            var item = Model[i];
+                            <tr data-product-id="@item.ProductId">
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input product-checkbox" name="selectedItems" value="@item.ProductId" onchange="updateTotal()">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="@item.ImageUrl" alt="@item.ProductName" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;" />
+                                        <span>@item.ProductName</span>
+                                    </div>
+                                </td>
+                                <td>@item.Price.ToString("#,##0") USD</td>
+                                <td>
+                                    <div class="quantity-control">
+                                        <button type="button" class="btn btn-sm btn-neon" onclick="updateQuantity(@item.ProductId, -1)">−</button>
+                                        <input type="number" class="quantity-input" name="quantities[@i]" value="@item.Quantity" min="1" readonly />
+                                        <button type="button" class="btn btn-sm btn-neon" onclick="updateQuantity(@item.ProductId, 1)">+</button>
+                                    </div>
+                                </td>
+                                <td class="item-total">@item.Total.ToString("#,##0") USD</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteItem(@item.ProductId)">Xóa</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="text-end"><strong>Tổng Thanh Toán:</strong></td>
+                            <td id="total-amount">0 USD</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="text-center">
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-neon">Tiếp Tục Mua Sắm</a>
+                    <button type="button" class="btn btn-neon" onclick="checkout()">Thanh Toán (<span id="selected-count">0</span>)</button>
+                </div>
+            </form>
+            <!-- Form ẩn để gửi danh sách sản phẩm đã chọn -->
+            <form id="checkout-form" asp-controller="Home" asp-action="Checkout" method="post" style="display: none;">
+                <input type="hidden" name="selectedProductIds" id="selected-product-ids" />
+            </form>
+        }
+        else
+        {
+            <p class="text-center" style="color: #cccccc;">Giỏ hàng của bạn đang trống.</p>
+            <div class="text-center">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-neon">Mua Sắm Ngay</a>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        let selectedItems = [];
+
+        // Chọn tất cả
+        function toggleSelectAll(checkbox) {
+            const checkboxes = document.querySelectorAll('.product-checkbox');
+            checkboxes.forEach(cb => cb.checked = checkbox.checked);
+            updateTotal();
+        }
+
+        // Cập nhật tổng tiền và số lượng sản phẩm được chọn
+        function updateTotal() {
+            selectedItems = [];
+            let total = 0;
+            let selectedCount = 0;
+            const checkboxes = document.querySelectorAll('.product-checkbox:checked');
+            checkboxes.forEach(cb => {
+                const productId = parseInt(cb.value); // Chuyển đổi thành số
+                selectedItems.push(productId);
+                const row = cb.closest('tr');
+                const itemTotal = parseFloat(row.querySelector('.item-total').textContent.replace(/[^0-9.-]+/g, ""));
+                total += itemTotal;
+                selectedCount++;
+            });
+            // Định dạng tổng tiền với dấu phẩy phân cách hàng nghìn, không có số thập phân
+            document.getElementById('total-amount').textContent = total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' USD';
+            document.getElementById('selected-count').textContent = selectedCount;
+        }
+
+        // Cập nhật số lượng
+        function updateQuantity(productId, change) {
+            const row = document.querySelector(`tr[data-product-id="${productId}"]`);
+            const quantityInput = row.querySelector('.quantity-input');
+            let quantity = parseInt(quantityInput.value);
+            quantity = Math.max(1, quantity + change);
+            quantityInput.value = quantity;
+
+            // Cập nhật tổng tiền của dòng
+            const price = parseFloat(row.cells[2].textContent.replace(/[^0-9.-]+/g, ""));
+            const newTotal = price * quantity;
+            // Định dạng tổng tiền của dòng với dấu phẩy phân cách hàng nghìn, không có số thập phân
+            row.querySelector('.item-total').textContent = newTotal.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' USD';
+
+            // Gửi yêu cầu cập nhật giỏ hàng
+            fetch('/Home/UpdateQuantity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ productId: productId, quantity: quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateTotal();
+                    updateCartCount();
+                }
+            });
+        }
+
+        // Xóa một sản phẩm
+        function deleteItem(productId) {
+            if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?')) {
+                fetch('/Home/RemoveFromCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ productId: productId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.querySelector(`tr[data-product-id="${productId}"]`).remove();
+                        updateTotal();
+                        updateCartCount();
+                        if (document.querySelectorAll('#cart-items tr').length === 0) {
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        }
+
+        // Xóa các sản phẩm được chọn
+        function deleteSelected() {
+            if (selectedItems.length === 0) {
+                alert('Vui lòng chọn ít nhất một sản phẩm để xóa.');
+                return;
+            }
+            if (confirm('Bạn có chắc chắn muốn xóa các sản phẩm đã chọn?')) {
+                fetch('/Home/RemoveSelectedFromCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ productIds: selectedItems })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        selectedItems.forEach(productId => {
+                            document.querySelector(`tr[data-product-id="${productId}"]`).remove();
+                        });
+                        updateTotal();
+                        updateCartCount();
+                        if (document.querySelectorAll('#cart-items tr').length === 0) {
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        }
+
+        // Thanh toán
+        function checkout() {
+            if (selectedItems.length === 0) {
+                alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán.');
+                return;
+            }
+            // Gửi danh sách sản phẩm đã chọn đến action Checkout
+            document.getElementById('selected-product-ids').value = JSON.stringify(selectedItems);
+            document.getElementById('checkout-form').submit();
+        }
+
+        // Cập nhật số lượng giỏ hàng trên navbar
+        function updateCartCount() {
+            fetch('/Home/GetCartCount')
+                .then(response => response.json())
+                .then(data => {
+                    const cartLink = document.querySelector('.cart-link');
+                    cartLink.textContent = `Giỏ Hàng (${data.count})`;
+                });
+        }
+
+        // Cập nhật tổng tiền khi tải trang
+        window.onload = function () {
+            // Đặt tất cả checkbox thành checked khi tải trang
+            const checkboxes = document.querySelectorAll('.product-checkbox');
+            checkboxes.forEach(cb => cb.checked = true);
+            updateTotal();
+        };
+    </script>
+}

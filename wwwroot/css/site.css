@@ -389,3 +389,151 @@ header {
   text-shadow: 0 0 5px #ff5555;
   font-size: 0.9em;
 }
+
+/* Cải thiện Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Thanh tìm kiếm trong Navbar */
+.navbar .search-form {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .search-form input {
+  background-color: #2a2a2a;
+  border: 1px solid #00ff00;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.navbar .search-form input:focus {
+  outline: none;
+  border-color: #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+.navbar .search-form button {
+  background-color: #00ff00;
+  border: none;
+  color: #000000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.navbar .search-form button:hover {
+  background-color: #ffffff;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+/* Nút giỏ hàng trong Navbar */
+.nav-item .cart-link {
+  background-color: #00ff00;
+  border: 2px solid #00ff00;
+  color: #000000;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin: 0 5px;
+  display: inline-block;
+}
+
+.nav-item .cart-link:hover {
+  background-color: transparent;
+  color: #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+/* Cải thiện Product Card */
+.product-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Cải thiện Footer */
+.footer {
+  padding: 20px 0;
+}
+
+.footer-item h3 {
+  font-size: 18px;
+}
+
+.footer-item p {
+  font-size: 14px;
+}
+/* Cart Header */
+.cart-header {
+  background-color: #2a2a2a;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.form-check-label {
+  color: #ffffff;
+}
+
+/* Quantity Control */
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-control .btn-neon {
+  padding: 2px 8px;
+  font-size: 14px;
+}
+
+.quantity-input {
+  width: 50px;
+  text-align: center;
+  background-color: #2a2a2a;
+  border: 1px solid #00ff00;
+  color: #ffffff;
+  border-radius: 5px;
+  margin: 0 5px;
+}
+
+/* Table Styling */
+.table-dark th, .table-dark td {
+  vertical-align: middle;
+}
+
+.table-dark th {
+  background-color: #000000;
+  color: #00ff00;
+}
+
+.table-dark td {
+  background-color: #1a1a1a;
+}
+
+/* Total Amount */
+#total-amount {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+/* Checkout Button */
+.btn-neon span {
+  color: #000000;
+}
+
+.col {
+  position: relative;
+}
+
+/* Định dạng nút "Miễn Phí" */
+.free-button {
+  transition: all 0.3s ease; /* Hiệu ứng di chuyển mượt mà */
+}

@@ -33,7 +33,12 @@
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Chính Sách Bảo Mật</a>
                             </li>
                         </ul>
-                        <!-- Nhóm các nút Đăng nhập/Đăng ký -->
+                        <!-- Thanh tìm kiếm -->
+                        <form class="search-form mx-3" asp-controller="Home" asp-action="Search" method="get">
+                            <input type="search" name="query" placeholder="Tìm kiếm..." aria-label="Search" />
+                            <button type="submit">Tìm</button>
+                        </form>
+                        <!-- Nhóm các nút Đăng nhập/Đăng ký và Giỏ hàng -->
                         <ul class="navbar-nav ms-auto">
                             @if (User.Identity.IsAuthenticated)
                             {
@@ -51,6 +56,11 @@
                                     <a class="nav-link btn btn-razer" asp-area="" asp-controller="Account" asp-action="Register">Đăng Ký</a>
                                 </li>
                             }
+                            <li class="nav-item">
+                                <a class="nav-link cart-link" asp-controller="Home" asp-action="Cart">
+                                    Giỏ Hàng (@(ViewBag.CartCount ?? 0))
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
