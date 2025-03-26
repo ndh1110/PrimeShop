@@ -5,7 +5,7 @@
 
 @{
     ViewData["Title"] = "Sản Phẩm";
-    bool isAdmin = User.Identity.IsAuthenticated && User.IsInRole("Admin");
+    bool isAdmin = User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin");
 }
 
 <section class="py-2">
@@ -25,111 +25,77 @@
             </div>
         }
         <div class="product-grid" id="product-list">
-            @foreach (var item in Model)
+            @if (Model.Any())
             {
-                <div class="product-card">
-                    <img src="@item.ImageUrl" class="product-image" alt="@item.Name">
-                    <div class="product-info">
-                        <div class="product-details">
-                            <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
-                            <p class="description">@item.Description</p>
-                            <p class="price">@item.Price.ToString("#,##0") USD</p>
-                        </div>
-                        <div class="button-group">
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Xem</a>
-                            <a asp-controller="Home" asp-action="AddToCart" asp-route-id="@item.Id" asp-route-quantity="1" class="btn btn-success">Thêm vào giỏ</a>
-                            @if (isAdmin)
-                            {
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Sửa</a>
-                                <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
-                                    <button type="submit" class="btn btn-danger">Xóa</button>
-                                </form>
-                            }
+                @foreach (var item in Model)
+                {
+                    <div class="product-card">
+                        <img src="@item.ImageUrl" class="product-image" alt="@item.Name">
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
+                                <p class="description">@item.Description</p>
+                                <p class="price">@item.Price.ToString("#,##0") USD</p>
+                            </div>
+                            <div class="button-group">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Xem</a>
+                                <a asp-controller="Home" asp-action="AddToCart" asp-route-id="@item.Id" asp-route-quantity="1" class="btn btn-success">Thêm vào giỏ</a>
+                                @if (isAdmin)
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Sửa</a>
+                                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </form>
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+            }
+            else
+            {
+                <p class="text-center" style="color: #cccccc;">Không có sản phẩm nào.</p>
             }
         </div>
-        <div id="loading" style="display: none; text-align: center;">
-            <p>Đang tải...</p>
-        </div>
-    </div>
 
-    <!-- Nút "Sản phẩm miễn phí" ở góc phải màn hình (chỉ hiển thị cho tài khoản thường) -->
-    @if (!isAdmin)
-    {
-        <button id="free-product-button" class="btn btn-success free-button" onmouseover="moveButton(this)">Sản phẩm miễn phí</button>
-    }
+        <!-- Phân trang -->
+        @if (ViewBag.TotalPages > 1)
+        {
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    @if (ViewBag.CurrentPage > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link neon-page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)">Trước</a>
+                        </li>
+                    }
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                            <a class="page-link neon-page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                        </li>
+                    }
+                    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link neon-page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)">Sau</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+
+        <!-- Nút "Sản phẩm miễn phí" ở góc phải màn hình (chỉ hiển thị cho tài khoản thường) -->
+        @if (!isAdmin)
+        {
+            <button id="free-product-button" class="btn btn-success free-button" onmouseover="moveButton(this)">Sản phẩm miễn phí</button>
+        }
+    </div>
 </section>
 
 @section Scripts {
     <script>
         let isAdmin = @(isAdmin ? "true" : "false");
-        let page = 1;
-        let isLoading = false;
-        let hasMore = true;
-
-        window.addEventListener('scroll', () => {
-            if (isLoading || !hasMore) return;
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-                page++;
-                loadMoreProducts();
-            }
-        });
-
-        function loadMoreProducts() {
-            isLoading = true;
-            document.getElementById('loading').style.display = 'block';
-
-            fetch(`/Home/GetProducts?page=${page}`)
-                .then(response => response.json())
-                .then(products => {
-                    isLoading = false;
-                    document.getElementById('loading').style.display = 'none';
-
-                    if (products.length === 0) {
-                        hasMore = false;
-                        return;
-                    }
-
-                    const productList = document.getElementById('product-list');
-                    products.forEach(item => {
-                        let buttonsHtml = `
-                            <a href="/Home/Details/${item.id}" class="btn btn-info">Xem</a>
-                            <a href="/Home/AddToCart/${item.id}?quantity=1" class="btn btn-success">Thêm vào giỏ</a>
-                        `;
-                        if (isAdmin) {
-                            buttonsHtml += `
-                                <a href="/Home/Edit/${item.id}" class="btn btn-success">Sửa</a>
-                                <form action="/Home/Delete/${item.id}" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
-                                    <button type="submit" class="btn btn-danger">Xóa</button>
-                                </form>
-                            `;
-                        }
-                        const productHtml = `
-                            <div class="product-card">
-                                <img src="${item.imageUrl}" class="product-image" alt="${item.name}">
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <h5>${item.name}</h5>
-                                        <p class="description">${item.description}</p>
-                                        <p class="price">${item.price.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} USD</p>
-                                    </div>
-                                    <div class="button-group">
-                                        ${buttonsHtml}
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        productList.insertAdjacentHTML('beforeend', productHtml);
-                    });
-                })
-                .catch(error => {
-                    isLoading = false;
-                    document.getElementById('loading').style.display = 'none';
-                    console.error('Error loading products:', error);
-                });
-        }
 
         // Hàm di chuyển nút "Sản phẩm miễn phí" khi rê chuột vào
         function moveButton(button) {

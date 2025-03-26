@@ -4,13 +4,22 @@
 @inject UserManager<_1298_DUYHUNG.Models.User> UserManager
 
 @{
-    ViewData["Title"] = "Kết Quả Tìm Kiếm";
-    bool isAdmin = User.Identity.IsAuthenticated && User.IsInRole("Admin");
+    ViewData["Title"] = ViewBag.IsCategoryView == true ? $"Sản phẩm {ViewBag.CategoryName}" : "Kết Quả Tìm Kiếm";
+    bool isAdmin = User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin");
 }
 
 <section class="py-2">
     <div class="container px-4 px-lg-5 mt-5">
-        <h2 class="neon-text">Kết Quả Tìm Kiếm</h2>
+        <h2 class="neon-text">
+            @if (ViewBag.IsCategoryView == true)
+            {
+                @:Sản phẩm @ViewBag.CategoryName
+            }
+            else
+            {
+                @:Kết Quả Tìm Kiếm
+            }
+        </h2>
         @if (Model.Any())
         {
             <div class="product-grid">
@@ -25,7 +34,7 @@
                                 <p class="price">@item.Price.ToString("#,##0") USD</p>
                             </div>
                             <div class="button-group">
-                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Xem</a>
+                                <a asp-controller="Home" asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Xem</a>
                                 <a asp-controller="Home" asp-action="AddToCart" asp-route-id="@item.Id" asp-route-quantity="1" class="btn btn-success">Thêm vào giỏ</a>
                                 @if (isAdmin)
                                 {

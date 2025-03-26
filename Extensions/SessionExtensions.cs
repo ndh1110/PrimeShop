@@ -9,10 +9,10 @@ namespace _1298_DUYHUNG.Extensions
             session.SetString(key, JsonSerializer.Serialize(value));
         }
 
-        public static T GetObjectFromJson<T>(this ISession session, string key)
+        public static T? GetObjectFromJson<T>(this ISession session, string key) where T : class
         {
             var value = session.GetString(key);
-            return value == null ? default : JsonSerializer.Deserialize<T>(value);
+            return value == null ? null : JsonSerializer.Deserialize<T>(value); // Dòng 15
         }
     }
 }

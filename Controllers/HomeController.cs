@@ -14,6 +14,31 @@ namespace _1298_DUYHUNG.Controllers
     {
         private readonly AppDbContext _context;
 
+        private readonly Dictionary<string, string> _keywordToCategoryMap = new Dictionary<string, string>
+        {
+            { "chuột", "Mice" },
+            { "mouse", "Mice" },
+            { "chuot", "Mice" },
+            { "tai nghe", "Headsets" },
+            { "headset", "Headsets" },
+            { "headphone", "Headsets" },
+            { "loa", "Speakers" },
+            { "speaker", "Speakers" },
+            { "laptop", "Laptops" },
+            { "bàn phím", "Keyboards" },
+            { "keyboard", "Keyboards" },
+            { "ghế", "Chairs" },
+            { "chair", "Chairs" },
+            { "phụ kiện", "Accessories" },
+            { "accessory", "Accessories" },
+            { "đế tản nhiệt", "Docks" },
+            { "dock", "Docks" },
+            { "mic", "Microphones" },
+            { "microphone", "Microphones" },
+            { "tay cầm", "Controllers" },
+            { "controller", "Controllers" }
+        };
+
         public HomeController(AppDbContext context)
         {
             _context = context;
@@ -25,21 +50,30 @@ namespace _1298_DUYHUNG.Controllers
             return View();
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            var initialProducts = _context.Products.Take(5).ToList();
-            UpdateCartCount();
-            return View(initialProducts);
-        }
+            int pageSize = 12; // Số sản phẩm mỗi trang
+            var totalProducts = _context.Products.Count(); // Tổng số sản phẩm
+            var totalPages = (int)Math.Ceiling(totalProducts / (double)pageSize); // Tổng số trang
 
-        [HttpGet]
-        public IActionResult GetProducts(int page = 1, int pageSize = 5)
-        {
+            // Đảm bảo page hợp lệ
+            page = Math.Max(1, page);
+            page = Math.Min(page, totalPages > 0 ? totalPages : 1);
+
+            // Lấy sản phẩm theo trang
             var products = _context.Products
+                .OrderBy(p => p.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
-            return Json(products);
+
+            // Truyền thông tin phân trang sang view
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.PageSize = pageSize;
+
+            UpdateCartCount();
+            return View(products);
         }
 
         [Authorize(Roles = "Admin")]
@@ -132,22 +166,41 @@ namespace _1298_DUYHUNG.Controllers
         [AllowAnonymous]
         public IActionResult Search(string query)
         {
-            if (string.IsNullOrEmpty(query))
+            if (string.IsNullOrWhiteSpace(query))
             {
                 UpdateCartCount();
-                return View(new List<Product>());
+                return View("Search", new List<Product>());
             }
 
-            var products = _context.Products
-                .Include(p => p.Category)
-                .Where(p => p.Name.Contains(query) || p.Category.Name.Contains(query))
-                .ToList();
+            query = query.ToLower().Trim();
+            var matchedCategory = _keywordToCategoryMap
+                .Where(kv => kv.Key.ToLower() == query)
+                .Select(kv => kv.Value)
+                .FirstOrDefault();
+
+            var products = new List<Product>();
+
+            if (matchedCategory != null)
+            {
+                products = _context.Products
+                    .Include(p => p.Category)
+                    .Where(p => p.Category != null && p.Category.Name == matchedCategory)
+                    .ToList();
+            }
+            else
+            {
+                products = _context.Products
+                    .Include(p => p.Category)
+                    .Where(p => p.Name.ToLower().Contains(query) || 
+                                (p.Category != null && p.Category.Name.ToLower().Contains(query)))
+                    .ToList();
+            }
 
             UpdateCartCount();
-            return View(products);
+            return View("Search", products);
         }
 
-        [AllowAnonymous]
+        [Authorize]
         public IActionResult AddToCart(int id, int quantity)
         {
             var product = _context.Products.Find(id);
@@ -176,7 +229,7 @@ namespace _1298_DUYHUNG.Controllers
             return RedirectToAction("Index");
         }
 
-        [AllowAnonymous]
+        [Authorize]
         public IActionResult Cart()
         {
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
@@ -184,7 +237,7 @@ namespace _1298_DUYHUNG.Controllers
             return View(cart);
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         public IActionResult UpdateQuantity(int productId, int quantity)
         {
@@ -203,7 +256,7 @@ namespace _1298_DUYHUNG.Controllers
             return Json(new { success = false });
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         public IActionResult RemoveFromCart(int productId)
         {
@@ -218,7 +271,7 @@ namespace _1298_DUYHUNG.Controllers
             return Json(new { success = false });
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         public IActionResult RemoveSelectedFromCart([FromBody] RemoveSelectedRequest request)
         {
@@ -228,7 +281,7 @@ namespace _1298_DUYHUNG.Controllers
             return Json(new { success = true });
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpGet]
         public IActionResult GetCartCount()
         {
@@ -237,7 +290,7 @@ namespace _1298_DUYHUNG.Controllers
             return Json(new { count = count });
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         public IActionResult Checkout(string selectedProductIds)
         {
@@ -247,6 +300,10 @@ namespace _1298_DUYHUNG.Controllers
             }
 
             var productIds = JsonSerializer.Deserialize<List<int>>(selectedProductIds);
+            if (productIds == null)
+            {
+                return RedirectToAction("Cart");
+            }
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
             var selectedItems = cart.Where(item => productIds.Contains(item.ProductId)).ToList();
 
@@ -264,7 +321,7 @@ namespace _1298_DUYHUNG.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         public IActionResult ConfirmCheckout(CheckoutViewModel model)
         {
@@ -273,7 +330,6 @@ namespace _1298_DUYHUNG.Controllers
                 return View("Checkout", model);
             }
 
-            // Lấy danh sách sản phẩm đã chọn từ giỏ hàng
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
             var selectedItems = cart.Where(item => model.SelectedItems.Any(si => si.ProductId == item.ProductId)).ToList();
 
@@ -282,16 +338,13 @@ namespace _1298_DUYHUNG.Controllers
                 return RedirectToAction("Cart");
             }
 
-            // Xử lý đơn hàng (lưu vào database, gửi email, v.v.)
-            // Ở đây tôi sẽ chỉ xóa các sản phẩm đã chọn khỏi giỏ hàng
             cart.RemoveAll(item => selectedItems.Any(si => si.ProductId == item.ProductId));
             HttpContext.Session.SetObjectAsJson("Cart", cart);
 
-            // Chuyển hướng đến trang xác nhận đơn hàng
             return RedirectToAction("OrderConfirmation");
         }
 
-        [AllowAnonymous]
+        [Authorize]
         public IActionResult OrderConfirmation()
         {
             UpdateCartCount();
@@ -300,13 +353,20 @@ namespace _1298_DUYHUNG.Controllers
 
         private void UpdateCartCount()
         {
-            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
-            ViewBag.CartCount = cart.Sum(c => c.Quantity);
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+                ViewBag.CartCount = cart.Sum(c => c.Quantity);
+            }
+            else
+            {
+                ViewBag.CartCount = 0;
+            }
         }
     }
 
     public class RemoveSelectedRequest
     {
-        public List<int> ProductIds { get; set; }
+        public List<int> ProductIds { get; set; } = new List<int>();
     }
 }

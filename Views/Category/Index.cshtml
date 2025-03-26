@@ -11,10 +11,17 @@
                 <div class="col mb-5">
                     <div class="category-card">
                         <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
-                        <a class="btn btn-neon" href="#">Xem Sản Phẩm</a>
+                        <a class="btn btn-neon" asp-action="ProductsByCategory" asp-route-id="@item.Id">Xem Sản Phẩm</a>
                     </div>
                 </div>
             }
+            <!-- Nút "Sản phẩm khác" -->
+            <div class="col mb-5">
+                <div class="category-card">
+                    <h5 class="card-title">Sản phẩm khác</h5>
+                    <a class="btn btn-neon" asp-action="OtherCategories">Xem Sản Phẩm</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>

@@ -38,6 +38,12 @@ namespace _1298_DUYHUNG.Controllers
             var result = await _signInManager.PasswordSignInAsync(username, password, isPersistent: false, lockoutOnFailure: false);
             if (result.Succeeded)
             {
+                var user = await _userManager.FindByNameAsync(username);
+                if (user != null)
+                {
+                    user.LastLogin = DateTime.UtcNow; // Cập nhật thời gian đăng nhập cuối
+                    await _userManager.UpdateAsync(user);
+                }
                 return RedirectToAction("Index", "Home");
             }
             ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
@@ -54,7 +60,6 @@ namespace _1298_DUYHUNG.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel model, string hcaptchaResponse)
         {
-
             if (ModelState.IsValid)
             {
                 var user = new User
@@ -63,12 +68,13 @@ namespace _1298_DUYHUNG.Controllers
                     Email = model.Email,
                     FullName = model.FullName,
                     Address = model.Address,
-                    PhoneNumber = model.PhoneNumber
+                    PhoneNumber = model.PhoneNumber,
+                    DateCreated = DateTime.UtcNow // Thêm DateCreated
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Customer"); // Gán vai trò Customer thay vì Guest
+                    await _userManager.AddToRoleAsync(user, "Customer");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -88,6 +94,14 @@ namespace _1298_DUYHUNG.Controllers
 
         private async Task<bool> VerifyCaptcha(string captchaResponse)
         {
+            using var client = new HttpClient();
+            var response = await client.PostAsync("https://hcaptcha.com/siteverify", new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("secret", "your-secret-key"),
+                new KeyValuePair<string, string>("response", captchaResponse)
+            }));
+            var result = await response.Content.ReadAsStringAsync();
+            var json = JObject.Parse(result);
             return true;
         }
     }

@@ -1,0 +1,42 @@
+@model _1298_DUYHUNG.Models.User
+
+@{
+    ViewData["Title"] = "Chi tiết tài khoản";
+}
+
+<section class="py-2">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="neon-text">Chi tiết tài khoản</h2>
+
+        <dl class="row">
+            <dt class="col-sm-3">Tên</dt>
+            <dd class="col-sm-9">@Model.UserName</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+
+            <dt class="col-sm-3">Họ tên</dt>
+            <dd class="col-sm-9">@Model.FullName</dd>
+
+            <dt class="col-sm-3">Địa chỉ</dt>
+            <dd class="col-sm-9">@Model.Address</dd>
+
+            <dt class="col-sm-3">Số điện thoại</dt>
+            <dd class="col-sm-9">@Model.PhoneNumber</dd>
+
+            <dt class="col-sm-3">Vai trò</dt>
+            <dd class="col-sm-9">@ViewBag.Role</dd>
+
+            <dt class="col-sm-3">Ngày tạo</dt>
+            <dd class="col-sm-9">@Model.DateCreated.ToString("dd/MM/yyyy HH:mm")</dd>
+
+            <dt class="col-sm-3">Lần đăng nhập cuối</dt>
+            <dd class="col-sm-9">@(Model.LastLogin?.ToString("dd/MM/yyyy HH:mm") ?? "Chưa đăng nhập")</dd>
+        </dl>
+
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Sửa</a>
+            <a asp-action="AccountManagement" class="btn btn-neon">Quay lại</a>
+        </div>
+    </div>
+</section>
