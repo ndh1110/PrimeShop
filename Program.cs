@@ -34,22 +34,74 @@ using (var scope = app.Services.CreateScope())
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
     // Tạo vai trò
-    if (!await roleManager.RoleExistsAsync("Admin"))
+    string[] roleNames = { "Admin", "Employee", "Customer", "Company" };
+    foreach (var roleName in roleNames)
     {
-        await roleManager.CreateAsync(new IdentityRole("Admin"));
+        if (!await roleManager.RoleExistsAsync(roleName))
+        {
+            await roleManager.CreateAsync(new IdentityRole(roleName));
+        }
     }
-    if (!await roleManager.RoleExistsAsync("Guest"))
-    {
-        await roleManager.CreateAsync(new IdentityRole("Guest"));
-    }
-
+    
     // Tạo tài khoản Admin
     var adminUser = await userManager.FindByEmailAsync("admin@example.com");
     if (adminUser == null)
     {
-        adminUser = new User { UserName = "admin", Email = "admin@example.com" };
+        adminUser = new User 
+        { 
+            UserName = "admin", 
+            Email = "admin@example.com",
+            FullName = "Admin User",
+            Address = "123 Admin Street",
+            PhoneNumber = "1234567890"
+        };
         await userManager.CreateAsync(adminUser, "AdminPassword123!");
         await userManager.AddToRoleAsync(adminUser, "Admin");
+    }
+
+    var employeeUser = await userManager.FindByEmailAsync("employee@example.com");
+    if (employeeUser == null)
+    {
+        employeeUser = new User 
+        { 
+            UserName = "employee", 
+            Email = "employee@example.com",
+            FullName = "Employee User",
+            Address = "456 Employee Lane",
+            PhoneNumber = "9876543210"
+        };
+        await userManager.CreateAsync(employeeUser, "EmployeePassword123!");
+        await userManager.AddToRoleAsync(employeeUser, "Employee");
+    }
+
+    var customerUser = await userManager.FindByEmailAsync("customer@example.com");
+    if (customerUser == null)
+    {
+        customerUser = new User 
+        { 
+            UserName = "customer", 
+            Email = "customer@example.com",
+            FullName = "Customer User",
+            Address = "789 Customer Blvd",
+            PhoneNumber = "1122334455"
+        };
+        await userManager.CreateAsync(customerUser, "CustomerPassword123!");
+        await userManager.AddToRoleAsync(customerUser, "Customer");
+    }
+
+    var companyUser = await userManager.FindByEmailAsync("company@example.com");
+    if (companyUser == null)
+    {
+        companyUser = new User 
+        { 
+            UserName = "company", 
+            Email = "company@example.com",
+            FullName = "Company User",
+            Address = "101 Company Ave",
+            PhoneNumber = "5566778899"
+        };
+        await userManager.CreateAsync(companyUser, "CompanyPassword123!");
+        await userManager.AddToRoleAsync(companyUser, "Company");
     }
 
     // Seed dữ liệu cho Categories
@@ -125,7 +177,13 @@ app.UseAuthorization();
 app.UseSession();
 
 app.MapControllerRoute(
+    name: "admin_area",
+    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Home}/{id?}");
+
+
 
 app.Run();

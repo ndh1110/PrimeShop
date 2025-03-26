@@ -14,5 +14,15 @@ namespace _1298_DUYHUNG.Models
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; } = string.Empty;
-    } 
+
+        [Required]
+        public string FullName { get; set; } = string.Empty;
+
+        [Required]
+        public string Address { get; set; } = string.Empty;
+
+        [Required]
+        [Phone]
+        public string PhoneNumber { get; set; } = string.Empty;
+    }
 }

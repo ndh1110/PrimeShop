@@ -11,6 +11,13 @@
 <section class="py-2">
     <div class="container px-4 px-lg-5 mt-5">
         <h2 class="neon-text">Danh Sách Sản Phẩm</h2>
+
+        <!-- Thanh tìm kiếm -->
+        <form class="search-form mb-3" asp-controller="Home" asp-action="Search" method="get">
+            <input type="search" name="query" placeholder="Tìm kiếm..." aria-label="Search" />
+            <button type="submit" class="btn btn-razer">Tìm</button>
+        </form>
+
         @if (isAdmin)
         {
             <div class="mb-3">

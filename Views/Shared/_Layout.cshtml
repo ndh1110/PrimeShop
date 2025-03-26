@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Hưng - Razer</title>
+    <title>@ViewData["Title"] - DuyHưng_1298</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -13,7 +13,7 @@
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
                 <div class="container">
-                    <a class="navbar-brand neon-text" asp-area="" asp-controller="Home" asp-action="Home">Hưng - Razer</a>
+                    <a class="navbar-brand neon-text" asp-area="" asp-controller="Home" asp-action="Home">DuyHưng_1298</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Chuyển đổi điều hướng">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -23,21 +23,34 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Home">Trang Chủ</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Sản Phẩm</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Category" asp-action="Index">Danh Mục</a>
-                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <!-- Hiển thị mục Quản Lý với dropdown cho Admin -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Quản Lý
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Quản lý sản phẩm</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Category" asp-action="Index">Quản lý danh mục</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Admin" asp-action="AccountManagement">Quản lý tài khoản</a></li>
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <!-- Hiển thị Sản Phẩm và Danh Mục cho các vai trò khác -->
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Sản Phẩm</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Category" asp-action="Index">Danh Mục</a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Chính Sách Bảo Mật</a>
                             </li>
                         </ul>
-                        <!-- Thanh tìm kiếm -->
-                        <form class="search-form mx-3" asp-controller="Home" asp-action="Search" method="get">
-                            <input type="search" name="query" placeholder="Tìm kiếm..." aria-label="Search" />
-                            <button type="submit">Tìm</button>
-                        </form>
                         <!-- Nhóm các nút Đăng nhập/Đăng ký và Giỏ hàng -->
                         <ul class="navbar-nav ms-auto">
                             @if (User.Identity.IsAuthenticated)

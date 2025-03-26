@@ -1,30 +1,55 @@
-@model RegisterViewModel
+@model _1298_DUYHUNG.Models.RegisterViewModel
 
 @{
     ViewData["Title"] = "Đăng Ký";
 }
 
 <div class="register-container">
-    <div class="razor-card">
+    <div class="razor-card auth-card">
         <h2 class="neon-text">Đăng Ký</h2>
         <form asp-action="Register" asp-controller="Account" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
+
             <div class="form-group">
-                <input asp-for="UserName" class="form-control" placeholder="Tên đăng nhập" />
+                <label asp-for="UserName" class="neon-label"></label>
+                <input asp-for="UserName" class="form-control neon-input" placeholder="Tên đăng nhập" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input asp-for="Email" class="form-control" placeholder="Email" />
+                <label asp-for="Email" class="neon-label"></label>
+                <input asp-for="Email" class="form-control neon-input" placeholder="Email" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input asp-for="Password" class="form-control" type="password" placeholder="Mật khẩu" />
+                <label asp-for="Password" class="neon-label"></label>
+                <input asp-for="Password" class="form-control neon-input" type="password" placeholder="Mật khẩu" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <div class="h-captcha" data-sitekey="b23a10a4-ca04-4944-bde6-32dad76c9b2c"></div>
+
+            <div class="form-group">
+                <label asp-for="FullName" class="neon-label"></label>
+                <input asp-for="FullName" class="form-control neon-input" placeholder="Họ và tên" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address" class="neon-label"></label>
+                <input asp-for="Address" class="form-control neon-input" placeholder="Địa chỉ" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="neon-label"></label>
+                <input asp-for="PhoneNumber" class="form-control neon-input" placeholder="Số điện thoại" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
             <button type="submit" class="btn btn-razer">Đăng Ký</button>
         </form>
     </div>
 </div>
 
-<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

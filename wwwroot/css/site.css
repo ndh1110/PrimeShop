@@ -537,3 +537,60 @@ header {
 .free-button {
   transition: all 0.3s ease; /* Hiệu ứng di chuyển mượt mà */
 }
+.dropdown-menu {
+  background-color: #343a40;
+  border: 1px solid #00ff00;
+}
+.dropdown-item {
+  color: #00ff00;
+}
+.dropdown-item:hover {
+  background-color: #00ff00;
+  color: #000;
+}
+
+/* Tùy chỉnh form tìm kiếm */
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Căn giữa thanh tìm kiếm */
+  max-width: 500px; /* Giới hạn chiều rộng tối đa */
+  margin: 0 auto; /* Căn giữa form */
+}
+
+/* Tùy chỉnh input tìm kiếm */
+.search-form input[type="search"] {
+  background-color: #1a1a1a; /* Màu nền tối */
+  color: #00ff00; /* Chữ màu xanh neon */
+  border: 2px solid #00ff00; /* Viền xanh neon */
+  border-radius: 5px 0 0 5px; /* Bo góc trái */
+  padding: 8px 12px; /* Khoảng cách bên trong */
+  font-size: 16px; /* Kích thước chữ */
+  width: 100%; /* Chiếm toàn bộ chiều rộng của form */
+  outline: none; /* Bỏ viền mặc định khi focus */
+  transition: border-color 0.3s ease; /* Hiệu ứng chuyển màu viền */
+}
+
+/* Hiệu ứng khi focus vào input */
+.search-form input[type="search"]:focus {
+  border-color: #00cc00; /* Viền sáng hơn khi focus */
+}
+
+/* Tùy chỉnh nút Tìm */
+.search-form .btn-razer {
+  background-color: #00ff00; /* Nền xanh neon */
+  color: #000; /* Chữ màu đen */
+  border: 2px solid #00ff00; /* Viền xanh neon */
+  border-radius: 0 5px 5px 0; /* Bo góc phải */
+  padding: 8px 16px; /* Khoảng cách bên trong */
+  font-size: 16px; /* Kích thước chữ */
+  font-weight: bold; /* Chữ đậm */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển màu */
+}
+
+/* Hiệu ứng khi hover vào nút Tìm */
+.search-form .btn-razer:hover {
+  background-color: #000; /* Nền đen khi hover */
+  color: #00ff00; /* Chữ xanh neon khi hover */
+  border-color: #00ff00; /* Viền giữ nguyên */
+}

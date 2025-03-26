@@ -52,56 +52,43 @@ namespace _1298_DUYHUNG.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(string username, string email, string password, string hcaptchaResponse)
+        public async Task<IActionResult> Register(RegisterViewModel model, string hcaptchaResponse)
         {
-            if (!await VerifyCaptcha(hcaptchaResponse))
-            {
-                ModelState.AddModelError("", "Captcha không hợp lệ.");
-                return View();
-            }
 
-            var user = new User { UserName = username, Email = email };
-            var result = await _userManager.CreateAsync(user, password);
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                await _userManager.AddToRoleAsync(user, "Guest");
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Home");
+                var user = new User
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    FullName = model.FullName,
+                    Address = model.Address,
+                    PhoneNumber = model.PhoneNumber
+                };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Customer"); // Gán vai trò Customer thay vì Guest
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
             }
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error.Description);
-            }
-            return View();
+            return View(model);
         }
 
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home"); // Chuyển hướng về trang chủ
+            return RedirectToAction("Index", "Home");
         }
 
         private async Task<bool> VerifyCaptcha(string captchaResponse)
         {
-            // Bỏ qua xác thực hCaptcha, luôn trả về true
             return true;
-
-            // Code gốc (đã được comment để tham khảo):
-            /*
-            var secretKey = "ES_da0b40c15db24731a974a4666e2a065f";
-            var client = new HttpClient();
-            var response = await client.PostAsync(
-                "https://hcaptcha.com/siteverify",
-                new FormUrlEncodedContent(new[]
-                {
-                    new KeyValuePair<string, string>("secret", secretKey),
-                    new KeyValuePair<string, string>("response", captchaResponse)
-                })
-            );
-            var result = await response.Content.ReadAsStringAsync();
-            var json = JObject.Parse(result);
-            return (bool)json["success"];
-            */
         }
     }
 }

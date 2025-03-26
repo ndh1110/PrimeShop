@@ -1,0 +1,28 @@
+@model List<_1298_DUYHUNG.Models.UserViewModel>
+@{
+    ViewData["Title"] = "Tài khoản";
+}
+
+<h2>Tài khoản</h2>
+
+<table class="table table-dark table-bordered" style="color: white;">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>SDT</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.Role</td>
+            </tr>
+        }
+    </tbody>
+</table>
