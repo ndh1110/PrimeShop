@@ -453,3 +453,8 @@ C:\Users\trumc\thuchangLTWeb\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Sec
 C:\Users\trumc\thuchangLTWeb\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\1298_DuyHung.csproj.AssemblyReference.cache
 C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\1298_Duy.5E91E8CF.Up2Date
+C:\Users\Hung\thucHangLTWeb\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\Hung\thucHangLTWeb\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Hung\thucHangLTWeb\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Hung\thucHangLTWeb\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Hung\thucHangLTWeb\obj\Debug\net8.0\1298_DuyHung.MvcApplicationPartsAssemblyInfo.cs

@@ -6,8 +6,14 @@ using _1298_DUYHUNG.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Cấu hình DbContext
+builder.Services.AddControllers(); // Hỗ trợ API controllers
+builder.Services.AddControllersWithViews(); // Hỗ trợ MVC (cho các trang web hiện tại)
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// (Tùy chọn) Thêm Swagger để kiểm tra API
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Cấu hình Identity
 builder.Services.AddIdentity<User, IdentityRole>()
@@ -29,6 +35,12 @@ builder.Services.AddSession(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 // Seed dữ liệu
 using (var scope = app.Services.CreateScope())
@@ -182,5 +194,12 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Home}/{id?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Định tuyến cho API
+app.MapControllers(); // Hỗ trợ API routes (như /api/products)
     
 app.Run();
