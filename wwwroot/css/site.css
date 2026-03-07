@@ -370,19 +370,6 @@ header {
   color: #ffffff;
   text-shadow: 0 0 10px #00ff00;
 }
-
-/* hCaptcha */
-.h-captcha {
-  display: flex;
-  justify-content: center;
-}
-
-.h-captcha iframe {
-  border: 1px solid #00ff00 !important;
-  border-radius: 5px;
-  box-shadow: 0 0 10px #00ff00;
-}
-
 /* Validation messages */
 .text-danger {
   color: #ff5555;

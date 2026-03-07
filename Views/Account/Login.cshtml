@@ -7,6 +7,7 @@
 <div class="login-container">
     <div class="razor-card">
         <h2 class="neon-text">Đăng Nhập</h2>
+        <div class="auth-container">
         <form asp-action="Login" asp-controller="Account" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -17,9 +18,9 @@
                 <input asp-for="Password" class="form-control" type="password" placeholder="Mật khẩu" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <div class="h-captcha" data-sitekey="b23a10a4-ca04-4944-bde6-32dad76c9b2c"></div>
             <button type="submit" class="btn btn-razer">Đăng Nhập</button>
         </form>
+        </div>
     </div>
 </div>
 

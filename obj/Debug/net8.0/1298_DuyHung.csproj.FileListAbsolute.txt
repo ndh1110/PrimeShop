@@ -28,7 +28,6 @@ M:\1298_DuyHung\obj\Debug\net8.0\refint\1298_DuyHung.dll
 M:\1298_DuyHung\obj\Debug\net8.0\1298_DuyHung.pdb
 M:\1298_DuyHung\obj\Debug\net8.0\1298_DuyHung.genruntimeconfig.cache
 M:\1298_DuyHung\obj\Debug\net8.0\ref\1298_DuyHung.dll
-C:\Users\trumc\thuchangLTWeb\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\trumc\thuchangLTWeb\bin\Debug\net8.0\appsettings.json
 C:\Users\trumc\thuchangLTWeb\bin\Debug\net8.0\1298_DuyHung.staticwebassets.runtime.json
 C:\Users\trumc\thuchangLTWeb\bin\Debug\net8.0\1298_DuyHung.staticwebassets.endpoints.json
@@ -51,12 +50,6 @@ C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\scopedcss\projectbundle\1298_DuyHu
 C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\staticwebassets\msbuild.1298_DuyHung.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\staticwebassets\msbuild.1298_DuyHung.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\staticwebassets\msbuild.build.1298_DuyHung.props
-C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.1298_DuyHung.props
-C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.1298_DuyHung.props
-C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\1298_DuyHung.dll
 C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\refint\1298_DuyHung.dll
 C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\1298_DuyHung.pdb
@@ -458,3 +451,13 @@ C:\Users\Hung\thucHangLTWeb\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Hung\thucHangLTWeb\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Hung\thucHangLTWeb\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Hung\thucHangLTWeb\obj\Debug\net8.0\1298_DuyHung.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\trumc\thuchangLTWeb\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\trumc\thuchangLTWeb\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\trumc\thuchangLTWeb\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\trumc\thuchangLTWeb\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\1298_DuyHung.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\trumc\thuchangLTWeb\obj\Debug\net8.0\staticwebassets.build.json.cache

@@ -10,10 +10,10 @@ html, body {
     margin: 0;
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #1A1A1A;
-    color: #FFFFFF;
+body{
+    font-family:'Orbitron',sans-serif;
+    background:#0b0b0b;
+    color:#fff;
 }
 
 .page-wrapper {
@@ -22,10 +22,9 @@ body {
     min-height: 100vh;
 }
 
-.container {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 70% 30%;
+.container{
+    max-width:1200px;
+    margin:auto;
 }
 
 /* Trang Chủ */
@@ -111,32 +110,32 @@ nav ul li a:hover {
 }
 
 /* Danh sách sản phẩm */
-.product-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 20px;
-    grid-column: 1;
+.product-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    padding:40px;
 }
 
-.product-card {
-    background-color: #2A2A2A;
-    border: 1px solid #00FF00;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.product-card{
+    background:#111;
+    border:1px solid #00ff00;
+    border-radius:12px;
+    padding:15px;
+    text-align:center;
+    transition:all .3s ease;
 }
 
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px #00FF00;
+.product-card:hover{
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:0 0 20px #00ff00;
 }
 
-.product-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
+.product-card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:8px;
 }
 
 .product-card h2 {
@@ -150,24 +149,20 @@ nav ul li a:hover {
 }
 
 /* Nút Mua Ngay */
-.button {
-    background-color: #00FF00;
-    border: none;
-    color: #000000;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 4px 2px;
-    border-radius: 12px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+.button{
+    background:#00ff00;
+    color:#000;
+    padding:10px 20px;
+    border-radius:6px;
+    font-weight:bold;
+    border:2px solid #00ff00;
+    transition:.3s;
 }
 
-.button:hover {
-    background-color: #FFFFFF;
-    box-shadow: 0 0 10px #00FF00;
+.button:hover{
+    background:transparent;
+    color:#00ff00;
+    box-shadow:0 0 12px #00ff00;
 }
 
 /* Sidebar */
@@ -230,4 +225,78 @@ nav ul li a:hover {
     .footer {
         grid-template-columns: 1fr;
     }
+}
+.navbar{
+    background:#000;
+    padding:15px;
+    border-bottom:1px solid #00ff00;
+}
+
+.navbar ul{
+    list-style:none;
+}
+
+.navbar li{
+    display:inline-block;
+}
+
+.navbar a{
+    color:#fff;
+    font-weight:600;
+    margin:0 15px;
+}
+
+.navbar a:hover{
+    color:#00ff00;
+    text-shadow:0 0 10px #00ff00;
+}
+/* AUTH FORM */
+
+.auth-container{
+max-width:500px;
+margin:80px auto;
+background:#111;
+padding:40px;
+border-radius:12px;
+border:1px solid #00ff00;
+box-shadow:0 0 20px #00ff00;
+}
+
+.auth-container h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+.form-control{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+background:#222;
+border:1px solid #00ff00;
+color:#fff;
+border-radius:6px;
+}
+
+.form-control:focus{
+outline:none;
+box-shadow:0 0 10px #00ff00;
+}
+
+.btn-auth{
+width:100%;
+padding:12px;
+background:#00ff00;
+color:#000;
+font-weight:bold;
+border:none;
+border-radius:6px;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn-auth:hover{
+background:#000;
+color:#00ff00;
+border:1px solid #00ff00;
+box-shadow:0 0 10px #00ff00;
 }
