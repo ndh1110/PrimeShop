@@ -113,6 +113,8 @@ header {
   text-shadow: 0 0 10px #00FF00;
   margin: 0;
   padding: 8px 15px;
+  font-size: 1rem !important; /* Thêm dòng này để ép chữ nhỏ lại (khoảng 16px) */
+  white-space: nowrap;        /* Thêm dòng này để chữ không bao giờ bị rớt dòng */
 }
 
 /* Footer */
@@ -321,16 +323,6 @@ header {
   color: #00ff00;
   text-shadow: 0 0 10px #00ff00;
   font-size: 1.2em;
-}
-
-/* Auth Form (Login/Register) */
-.auth-card {
-  background: #1a1a1a;
-  border: 2px solid #00ff00;
-  border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0 0 15px #00ff00;
-  transition: transform 0.3s ease;
 }
 
 .auth-card:hover {
@@ -669,4 +661,44 @@ header {
 /* Kiểu cho bảng responsive */
 .table-responsive {
   overflow-x: auto;
+}
+a.navbar-brand.neon-text {
+    font-size: 1.4rem !important; /* Đổi thành 1.0rem nếu vẫn thấy to */
+}
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+/* Sửa lại class auth-card hiện tại của bạn thành thế này */
+.auth-card {
+    background: #1a1a1a;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 15px #00ff00;
+    transition: transform 0.3s ease;
+    width: 100%;           /* Thêm dòng này */
+    max-width: 500px;      /* Thêm dòng này để form không bị khổng lồ */
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 12px;
+    background-color: #00ff00;
+    color: #000000;
+    font-weight: bold;
+    border: 2px solid #00ff00;
+    border-radius: 6px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.btn-auth:hover {
+    background-color: #000000;
+    color: #00ff00;
+    box-shadow: 0 0 15px #00ff00;
 }
