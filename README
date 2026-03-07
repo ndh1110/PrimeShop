@@ -1,0 +1,73 @@
+# 🐍 HƯNG | RAZER - Shop Giao Diện Cyberpunk
+
+![Razer Style](https://img.shields.io/badge/UI-Cyberpunk_Neon-00FF00?style=for-the-badge)
+![.NET](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
+![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
+
+Chào mừng đến với **HƯNG | RAZER** - Dự án website thương mại điện tử mang phong cách thiết kế Cyberpunk cực ngầu, lấy cảm hứng từ thương hiệu Razer. 
+
+## ✨ Tính Năng Nổi Bật
+* **Giao diện Neon độc đáo:** Trải nghiệm người dùng với tone màu Đen - Xanh lá chuẩn phong cách gaming.
+* **Quản lý Sản phẩm & Danh mục:** Đầy đủ chức năng thêm, sửa, xóa dành cho Admin/Employee.
+* **Mua sắm thông minh:** Hệ thống giỏ hàng mượt mà, tự động tính toán tổng tiền.
+* **Xác thực bảo mật:** Hệ thống Đăng ký/Đăng nhập và phân quyền người dùng (Admin, Nhân viên, Khách hàng).
+* **Responsive Design:** Hiển thị tốt trên cả giao diện máy tính và điện thoại.
+
+## 🛠️ Công Nghệ Sử Dụng
+* **Back-end:** ASP.NET Core MVC (C#)
+* **Cơ sở dữ liệu:** Microsoft SQL Server & Entity Framework Core
+* **Front-end:** HTML5, CSS3 (Custom Neon Style), Bootstrap, jQuery
+
+---
+
+## 🚀 Hướng Dẫn Cài Đặt & Chạy Code
+
+Để chạy được project này trên máy cá nhân, các bạn cần chuẩn bị môi trường và thực hiện theo các bước sau:
+
+### 1. Yêu cầu phần mềm (Prerequisites)
+* Trình soạn thảo: **Visual Studio 2022** (Khuyên dùng) hoặc **Visual Studio Code**.
+* Môi trường chạy: **.NET SDK** (Phiên bản tương ứng với project).
+* Cơ sở dữ liệu: **SQL Server** và **SQL Server Management Studio (SSMS)**.
+
+### 2. Các bước cài đặt
+
+**Bước 1: Tải mã nguồn**
+Mở Terminal/Git Bash ở thư mục muốn lưu project và chạy lệnh:
+```bash
+git clone [https://github.com/ndh1110/HungRZ_Shop.git](https://github.com/ndh1110/HungRZ_Shop.git)
+Bước 2: Cấu hình kết nối Database
+
+Mở thư mục code, tìm và mở file appsettings.json.
+
+Tìm chuỗi kết nối DefaultConnection.
+
+Sửa phần Server=... thành tên Server SQL trên máy tính của bạn (thường là .\SQLEXPRESS hoặc localhost).
+
+Bước 3: Khởi tạo Cơ sở dữ liệu (Migration)
+
+Nếu dùng Visual Studio 2022: Mở cửa sổ Package Manager Console (Vào Tools > NuGet Package Manager) và gõ lệnh:
+
+PowerShell
+Update-Database
+Nếu dùng Visual Studio Code: Mở Terminal và gõ lệnh:
+
+Bash
+dotnet ef database update
+Bước 4: Khởi chạy website
+
+Visual Studio 2022: Bấm biểu tượng Play (mũi tên xanh) hoặc nhấn phím F5.
+
+Visual Studio Code: Mở Terminal và gõ lệnh:
+
+Bash
+dotnet watch run
+🎉 Xong! Trang web sẽ tự động mở lên trên trình duyệt của bạn.
+
+
+**Thao tác cuối cùng:**
+Sau khi lưu file `README.md` này, bạn chỉ cần mở Terminal lên và chạy 3 lệnh quen thuộc để đẩy file này lên GitHub:
+1. `git add README.md`
+2. `git commit -m "Them file huong dan README"`
+3. `git push`
+
+File sẽ lập tức hiển thị ngay ở trang chủ repository GitHub của bạn với giao diện c
