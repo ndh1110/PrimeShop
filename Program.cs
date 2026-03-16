@@ -9,7 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(); // Hỗ trợ API controllers
 builder.Services.AddControllersWithViews(); // Hỗ trợ MVC (cho các trang web hiện tại)
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    var useInMemory = builder.Configuration.GetValue<bool>("UseInMemoryDatabase");
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+    if (useInMemory || string.IsNullOrWhiteSpace(connectionString))
+    {
+        options.UseInMemoryDatabase("RazerStoreInMemory");
+    }
+    else
+    {
+        options.UseSqlServer(connectionString);
+    }
+});
 
 // (Tùy chọn) Thêm Swagger để kiểm tra API
 builder.Services.AddEndpointsApiExplorer();
