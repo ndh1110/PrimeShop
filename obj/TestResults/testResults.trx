@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="9cb9763d-aa8a-4236-8c5e-04496d8c3e6f" name="trumc@DESKTOP-8JS9L6L 2026-03-17 02:56:37" runUser="DESKTOP-8JS9L6L\trumc" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-03-17T02:56:37.7664445+07:00" queuing="2026-03-17T02:56:37.7664447+07:00" start="2026-03-17T02:56:36.5008604+07:00" finish="2026-03-17T02:56:37.7708367+07:00" />
+  <TestSettings name="default" id="3ea41e89-dc5a-4759-ae65-cd71103d587d">
+    <Deployment runDeploymentRoot="trumc_DESKTOP-8JS9L6L_2026-03-17_02_56_37" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ba169af2-93f2-43af-a847-160d1c2c245b" testId="148d51ac-8fa3-7a08-60fa-8ee72b3a8aa8" testName="_1298_DUYHUNG.Tests.HomeControllerCartTests.RemoveFromCart_WhenItemExists_ReturnsSuccessJson" computerName="DESKTOP-8JS9L6L" duration="00:00:00.0040249" startTime="2026-03-17T02:56:37.6893619+07:00" endTime="2026-03-17T02:56:37.6893620+07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ba169af2-93f2-43af-a847-160d1c2c245b" />
+    <UnitTestResult executionId="e1765111-e37f-4224-94ac-4a55b6d320c0" testId="ec44360b-fb7d-7c56-750f-3e7290db1339" testName="_1298_DUYHUNG.Tests.HomeControllerCartTests.GetCartCount_ReturnsTotalQuantityOfItems" computerName="DESKTOP-8JS9L6L" duration="00:00:00.4440813" startTime="2026-03-17T02:56:37.4014459+07:00" endTime="2026-03-17T02:56:37.4014572+07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e1765111-e37f-4224-94ac-4a55b6d320c0" />
+    <UnitTestResult executionId="3c00cb6d-7aa7-4458-b899-79949f6ca3cf" testId="f70e11c8-3daf-3d0b-9daa-30fb138170ed" testName="_1298_DUYHUNG.Tests.HomeControllerCartTests.AddToCart_WithNewProduct_ReturnsRedirectToIndex" computerName="DESKTOP-8JS9L6L" duration="00:00:00.2840294" startTime="2026-03-17T02:56:37.6852736+07:00" endTime="2026-03-17T02:56:37.6852739+07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3c00cb6d-7aa7-4458-b899-79949f6ca3cf" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="_1298_DUYHUNG.Tests.HomeControllerCartTests.GetCartCount_ReturnsTotalQuantityOfItems" storage="c:\users\trumc\primeshop\bin\debug\net8.0\1298_duyhung.dll" id="ec44360b-fb7d-7c56-750f-3e7290db1339">
+      <Execution id="e1765111-e37f-4224-94ac-4a55b6d320c0" />
+      <TestMethod codeBase="C:\Users\trumc\PrimeShop\bin\Debug\net8.0\1298_DuyHung.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="_1298_DUYHUNG.Tests.HomeControllerCartTests" name="GetCartCount_ReturnsTotalQuantityOfItems" />
+    </UnitTest>
+    <UnitTest name="_1298_DUYHUNG.Tests.HomeControllerCartTests.RemoveFromCart_WhenItemExists_ReturnsSuccessJson" storage="c:\users\trumc\primeshop\bin\debug\net8.0\1298_duyhung.dll" id="148d51ac-8fa3-7a08-60fa-8ee72b3a8aa8">
+      <Execution id="ba169af2-93f2-43af-a847-160d1c2c245b" />
+      <TestMethod codeBase="C:\Users\trumc\PrimeShop\bin\Debug\net8.0\1298_DuyHung.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="_1298_DUYHUNG.Tests.HomeControllerCartTests" name="RemoveFromCart_WhenItemExists_ReturnsSuccessJson" />
+    </UnitTest>
+    <UnitTest name="_1298_DUYHUNG.Tests.HomeControllerCartTests.AddToCart_WithNewProduct_ReturnsRedirectToIndex" storage="c:\users\trumc\primeshop\bin\debug\net8.0\1298_duyhung.dll" id="f70e11c8-3daf-3d0b-9daa-30fb138170ed">
+      <Execution id="3c00cb6d-7aa7-4458-b899-79949f6ca3cf" />
+      <TestMethod codeBase="C:\Users\trumc\PrimeShop\bin\Debug\net8.0\1298_DuyHung.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="_1298_DUYHUNG.Tests.HomeControllerCartTests" name="AddToCart_WithNewProduct_ReturnsRedirectToIndex" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="148d51ac-8fa3-7a08-60fa-8ee72b3a8aa8" executionId="ba169af2-93f2-43af-a847-160d1c2c245b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ec44360b-fb7d-7c56-750f-3e7290db1339" executionId="e1765111-e37f-4224-94ac-4a55b6d320c0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f70e11c8-3daf-3d0b-9daa-30fb138170ed" executionId="3c00cb6d-7aa7-4458-b899-79949f6ca3cf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.25)&#xD;
+[xUnit.net 00:00:00.06]   Discovering: 1298_DuyHung&#xD;
+[xUnit.net 00:00:00.09]   Discovered:  1298_DuyHung&#xD;
+[xUnit.net 00:00:00.09]   Starting:    1298_DuyHung&#xD;
+[xUnit.net 00:00:00.85]   Finished:    1298_DuyHung&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

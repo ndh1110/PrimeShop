@@ -151,24 +151,33 @@
         // Xóa một sản phẩm
         function deleteItem(productId) {
             if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?')) {
+                // Dùng URLSearchParams để gửi dữ liệu dạng Form thay vì JSON
+                const data = new URLSearchParams();
+                data.append('productId', productId);
+
                 fetch('/Home/RemoveFromCart', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ productId: productId })
+                    body: data // Gửi trực tiếp data, không cần JSON.stringify
                 })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        document.querySelector(`tr[data-product-id="${productId}"]`).remove();
+                        // Xóa dòng trên giao diện
+                        let row = document.querySelector(`tr[data-product-id="${productId}"]`);
+                        if (row) row.remove();
+                        
                         updateTotal();
                         updateCartCount();
+                        
+                        // Nếu xóa hết sạch thì load lại trang để hiện thông báo giỏ hàng trống
                         if (document.querySelectorAll('#cart-items tr').length === 0) {
                             location.reload();
                         }
+                    } else {
+                        alert("Xóa thất bại!");
                     }
-                });
+                })
+                .catch(error => console.error('Error:', error));
             }
         }
 
