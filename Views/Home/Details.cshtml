@@ -1,0 +1,15 @@
+@model _1298_DUYHUNG.Models.Product
+
+@{
+    ViewData["Title"] = "Chi Tiết Sản Phẩm";
+}
+
+<h2 class="neon-text">Chi Tiết Sản Phẩm</h2>
+<div class="product-card">
+    <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Name" style="height: 300px; object-fit: cover;">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p>@Model.Description</p>
+        <p class="price">@Model.Price.ToString("#,##0") USD</p>
+    </div>
+</div>

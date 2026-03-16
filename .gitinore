@@ -1,0 +1,27 @@
+# ASP.NET Core ignore patterns
+bin/
+obj/
+*.csproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio files
+.vscode/
+*.vs/
+*.swp
+
+# Dependency directories
+wwwroot/lib/
+
+# Logs
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env

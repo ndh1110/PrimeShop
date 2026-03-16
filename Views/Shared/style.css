@@ -1,0 +1,298 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body{
+    font-family:'Orbitron',sans-serif;
+    background:#0b0b0b;
+    color:#fff;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+/* Trang Chủ */
+/* Thêm quy tắc cho banner */
+.banner {
+    height: 45vh; /* Tăng chiều cao của banner từ 50vh (hoặc giá trị cũ) lên 60vh */
+}
+
+.main-content {
+    padding: 40px;
+    text-align: center;
+}
+
+.main-content h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+.main-content p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+.btn-neon {
+    background-color: #00FF00;
+    border: none;
+    color: #000000;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 12px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-neon:hover {
+    background-color: #FFFFFF;
+    box-shadow: 0 0 10px #00FF00;
+}
+
+.neon-text {
+    color: #00FF00;
+    text-shadow: 0 0 10px #00FF00;
+}
+
+/* Header */
+header {
+    background-color: #000000;
+    color: #00FF00;
+    padding: 20px;
+    text-align: center;
+    grid-column: 1 / span 2;
+    text-shadow: 0 0 10px #00FF00;
+}
+
+/* Menu điều hướng */
+nav {
+    background-color: #000000;
+    text-align: center;
+    padding: 10px;
+    grid-column: 1 / span 2;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #00FF00;
+    text-shadow: 0 0 5px #00FF00;
+}
+
+/* Danh sách sản phẩm */
+.product-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    padding:40px;
+}
+
+.product-card{
+    background:#111;
+    border:1px solid #00ff00;
+    border-radius:12px;
+    padding:15px;
+    text-align:center;
+    transition:all .3s ease;
+}
+
+.product-card:hover{
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:0 0 20px #00ff00;
+}
+
+.product-card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.product-card h2 {
+    color: #00FF00;
+    margin: 10px 0;
+}
+
+.product-card p {
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+/* Nút Mua Ngay */
+.button{
+    background:#00ff00;
+    color:#000;
+    padding:10px 20px;
+    border-radius:6px;
+    font-weight:bold;
+    border:2px solid #00ff00;
+    transition:.3s;
+}
+
+.button:hover{
+    background:transparent;
+    color:#00ff00;
+    box-shadow:0 0 12px #00ff00;
+}
+
+/* Sidebar */
+.sidebar {
+    padding: 20px;
+    grid-column: 2;
+}
+
+.social-icons a {
+    display: block;
+    color: #FFFFFF;
+    text-decoration: none;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.social-icons a i {
+    margin-right: 10px;
+}
+
+.social-icons a:hover {
+    color: #00FF00;
+    text-shadow: 0 0 5px #00FF00;
+}
+
+/* Footer */
+.footer{
+    background:#000;
+    color:#fff;
+    padding:40px 20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    border-top:1px solid #00ff00;
+}
+
+.footer-item h3 {
+    color: #00FF00;
+    margin-bottom: 10px;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 576px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .product-list {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .sidebar {
+        grid-column: 1 / span 2;
+    }
+
+    .footer {
+        grid-template-columns: 1fr;
+    }
+}
+.navbar{
+    background:#000;
+    padding:15px;
+    border-bottom:1px solid #00ff00;
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#000;
+    padding:15px 40px;
+    border-bottom:1px solid #00ff00;
+}
+.navbar-brand {
+    font-size: 1.2rem; /* Thay đổi số này (ví dụ 1.0rem hoặc 1.5rem) cho đến khi vừa mắt */
+}
+.navbar ul{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+.navbar a{
+    color:#fff;
+    font-weight:600;
+    margin:0 15px;
+}
+
+.navbar a:hover{
+    color:#00ff00;
+    text-shadow:0 0 10px #00ff00;
+}
+/* AUTH FORM */
+
+
+
+.form-control{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+background:#222;
+border:1px solid #00ff00;
+color:#fff;
+border-radius:6px;
+}
+
+.form-control:focus{
+outline:none;
+box-shadow:0 0 10px #00ff00;
+}
+
+.btn-auth{
+width:100%;
+padding:12px;
+background:#00ff00;
+color:#000;
+font-weight:bold;
+border:none;
+border-radius:6px;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn-auth:hover{
+background:#000;
+color:#00ff00;
+border:1px solid #00ff00;
+box-shadow:0 0 10px #00ff00;
+}

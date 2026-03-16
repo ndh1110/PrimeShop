@@ -1,0 +1,704 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 1;
+  max-width: 1200px;
+}
+
+/* Header */
+header {
+  background-color: #000000;
+}
+
+.navbar {
+  background-color: #000000;
+  border-bottom: 2px solid #00FF00;
+}
+
+.navbar-brand.neon-text {
+  color: #00FF00;
+  text-shadow: 0 0 10px #00FF00;
+}
+
+/* Cập nhật style cho các liên kết trong navbar */
+.nav-link {
+  color: #FFFFFF;
+  transition: color 0.3s ease;
+  padding: 8px 15px;
+}
+
+.nav-link:hover {
+  color: #00FF00;
+  text-shadow: 0 0 5px #00FF00;
+}
+
+/* Định dạng đặc biệt cho các nút trong navbar */
+.nav-item .btn-neon {
+  background-color: #00FF00;
+  border: none;
+  color: #000000;
+  padding: 8px 15px;
+  font-weight: bold;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin: 0 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.nav-item .btn-neon:hover {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px #00FF00;
+  color: #000000;
+}
+
+/* Định dạng cho nút btn-razer trong navbar - Thu nhỏ khung */
+.nav-item .btn-razer,
+.ms-auto .btn-razer {
+  background-color: #00FF00;
+  border: 2px solid #00FF00;
+  color: #000000;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin: 0 5px;
+  display: inline-block;
+}
+
+.nav-item .btn-razer:hover,
+.ms-auto .btn-razer:hover {
+  background-color: transparent;
+  color: #00FF00;
+  box-shadow: 0 0 10px #00FF00;
+}
+
+/* Định dạng cho nhóm nút Đăng nhập/Đăng ký */
+.ms-auto .nav-link.btn-razer {
+  margin-left: 5px;
+}
+
+.ms-auto .nav-link.neon-text {
+  margin-right: 5px;
+}
+
+/* Đảm bảo văn bản "Xin chào" trong navbar hiển thị neon */
+.nav-item .neon-text {
+  color: #00FF00;
+  text-shadow: 0 0 10px #00FF00;
+  margin: 0;
+  padding: 8px 15px;
+  font-size: 1rem !important; /* Thêm dòng này để ép chữ nhỏ lại (khoảng 16px) */
+  white-space: nowrap;        /* Thêm dòng này để chữ không bao giờ bị rớt dòng */
+}
+
+/* Footer */
+.footer {
+  background-color: #000000;
+  color: #FFFFFF;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  align-items: center;
+}
+
+.footer-item h3 {
+  color: #00FF00;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.footer-item p {
+  font-size: 13px;
+}
+
+.social-icons a {
+  color: #FFFFFF;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #00FF00;
+  text-shadow: 0 0 5px #00FF00;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .footer-content {
+      grid-template-columns: 1fr;
+  }
+
+  .footer-item {
+      margin-bottom: 20px;
+  }
+
+  /* Điều chỉnh navbar trên mobile */
+  .ms-auto {
+      margin-top: 10px;
+      justify-content: flex-end !important;
+  }
+
+  .ms-auto .nav-link.btn-razer {
+      margin-left: 0;
+      margin-right: 5px;
+  }
+}
+
+/* Nút Neon */
+.btn-neon {
+  background-color: #00FF00;
+  border: none;
+  color: #000000;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-neon:hover {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px #00FF00;
+}
+
+/* Văn bản Neon */
+.neon-text {
+  color: #00FF00;
+  text-shadow: 0 0 10px #00FF00;
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.product-card {
+  background: #1a1a1a;
+  border: 2px solid #00ff00;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 0 15px #00ff00;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.product-details {
+  flex: 1;
+  text-align: left;
+}
+
+.product-details h5 {
+  margin: 0;
+  font-size: 1.1em;
+  color: #ffffff;
+}
+
+.description {
+  margin: 0;
+  font-size: 0.9em;
+  color: #cccccc;
+}
+
+.price {
+  margin: 0;
+  color: #00ff00;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.button-group {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+  box-shadow: 0 0 10px #17a2b8;
+}
+
+.btn-success {
+  background-color: #00ff00;
+  color: #000000;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.btn-success:hover {
+  background-color: #00cc00;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  box-shadow: 0 0 10px #dc3545;
+}
+
+/* Responsive adjustments for product info */
+@media (max-width: 576px) {
+  .product-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button-group {
+    margin-top: 10px;
+    justify-content: flex-start;
+  }
+}
+
+/* Loading */
+#loading {
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+  font-size: 1.2em;
+}
+
+.auth-card:hover {
+  transform: scale(1.02);
+}
+
+.neon-label {
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.neon-input {
+  background-color: #2a2a2a;
+  border: 1px solid #00ff00;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.neon-input:focus {
+  outline: none;
+  border-color: #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+.neon-link {
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.neon-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #00ff00;
+}
+/* Validation messages */
+.text-danger {
+  color: #ff5555;
+  text-shadow: 0 0 5px #ff5555;
+  font-size: 0.9em;
+}
+
+/* Cải thiện Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Thanh tìm kiếm trong Navbar */
+.navbar .search-form {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .search-form input {
+  background-color: #2a2a2a;
+  border: 1px solid #00ff00;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.navbar .search-form input:focus {
+  outline: none;
+  border-color: #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+.navbar .search-form button {
+  background-color: #00ff00;
+  border: none;
+  color: #000000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.navbar .search-form button:hover {
+  background-color: #ffffff;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+/* Nút giỏ hàng trong Navbar */
+.nav-item .cart-link {
+  background-color: #00ff00;
+  border: 2px solid #00ff00;
+  color: #000000;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin: 0 5px;
+  display: inline-block;
+}
+
+.nav-item .cart-link:hover {
+  background-color: transparent;
+  color: #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+/* Cải thiện Product Card */
+.product-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Cải thiện Footer */
+.footer {
+  padding: 20px 0;
+}
+
+.footer-item h3 {
+  font-size: 18px;
+}
+
+.footer-item p {
+  font-size: 14px;
+}
+
+/* Cart Header */
+.cart-header {
+  background-color: #2a2a2a;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.form-check-label {
+  color: #ffffff;
+}
+
+/* Quantity Control */
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-control .btn-neon {
+  padding: 2px 8px;
+  font-size: 14px;
+}
+
+.quantity-input {
+  width: 50px;
+  text-align: center;
+  background-color: #2a2a2a;
+  border: 1px solid #00ff00;
+  color: #ffffff;
+  border-radius: 5px;
+  margin: 0 5px;
+}
+
+/* Table Styling */
+.table-dark th, .table-dark td {
+  vertical-align: middle;
+}
+
+.table-dark th {
+  background-color: #000000;
+  color: #00ff00;
+}
+
+.table-dark td {
+  background-color: #1a1a1a;
+}
+
+/* Total Amount */
+#total-amount {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+/* Checkout Button */
+.btn-neon span {
+  color: #000000;
+}
+
+.col {
+  position: relative;
+}
+
+/* Định dạng nút "Miễn Phí" */
+.free-button {
+  transition: all 0.3s ease; /* Hiệu ứng di chuyển mượt mà */
+}
+
+.dropdown-menu {
+  background-color: #343a40;
+  border: 1px solid #00ff00;
+}
+
+.dropdown-item {
+  color: #00ff00;
+}
+
+.dropdown-item:hover {
+  background-color: #00ff00;
+  color: #000;
+}
+
+/* Tùy chỉnh form tìm kiếm */
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Căn giữa thanh tìm kiếm */
+  max-width: 500px; /* Giới hạn chiều rộng tối đa */
+  margin: 0 auto; /* Căn giữa form */
+}
+
+/* Tùy chỉnh input tìm kiếm */
+.search-form input[type="search"],
+.search-form input[type="text"] {
+  background-color: #1a1a1a; /* Màu nền tối */
+  color: #00ff00; /* Chữ màu xanh neon */
+  border: 2px solid #00ff00; /* Viền xanh neon */
+  border-radius: 5px 0 0 5px; /* Bo góc trái */
+  padding: 8px 12px; /* Khoảng cách bên trong */
+  font-size: 16px; /* Kích thước chữ */
+  width: 100%; /* Chiếm toàn bộ chiều rộng của form */
+  outline: none; /* Bỏ viền mặc định khi focus */
+  transition: border-color 0.3s ease; /* Hiệu ứng chuyển màu viền */
+}
+
+/* Hiệu ứng khi focus vào input */
+.search-form input[type="search"]:focus,
+.search-form input[type="text"]:focus {
+  border-color: #00cc00; /* Viền sáng hơn khi focus */
+}
+
+/* Tùy chỉnh nút Tìm */
+.search-form .btn-razer {
+  background-color: #00ff00; /* Nền xanh neon */
+  color: #000; /* Chữ màu đen */
+  border: 2px solid #00ff00; /* Viền xanh neon */
+  border-radius: 0 5px 5px 0; /* Bo góc phải */
+  padding: 8px 16px; /* Khoảng cách bên trong */
+  font-size: 16px; /* Kích thước chữ */
+  font-weight: bold; /* Chữ đậm */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển màu */
+}
+
+/* Hiệu ứng khi hover vào nút Tìm */
+.search-form .btn-razer:hover {
+  background-color: #000; /* Nền đen khi hover */
+  color: #00ff00; /* Chữ xanh neon khi hover */
+  border-color: #00ff00; /* Viền giữ nguyên */
+}
+
+/* Kiểu cho bảng Quản lý tài khoản */
+.neon-table {
+  color: #fff;
+  background: #2a2a2a;
+  border: 1px solid #00ff00;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.neon-table th, .neon-table td {
+  border: 1px solid #00ff00;
+  padding: 12px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.neon-table th {
+  background: #333;
+  font-size: 1.1rem;
+}
+
+.neon-table tbody tr:hover {
+  background: #444;
+  box-shadow: 0 0 10px #00ff00 inset;
+}
+
+/* Kiểu cho nút hành động trong bảng */
+.neon-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+.neon-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px #00ff00, 0 0 25px rgba(0, 255, 0, 0.7);
+}
+
+/* Kiểu cho thông báo */
+.neon-alert {
+  border: 1px solid #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+  background: #2a2a2a;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Kiểu cho phân trang */
+.pagination {
+  margin-top: 30px;
+}
+
+.neon-page-link {
+  color: #00ff00;
+  background: #2a2a2a;
+  border: 1px solid #00ff00;
+  margin: 0 5px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.neon-page-link:hover {
+  background: #00ff00;
+  color: #000;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+.pagination .page-item.active .neon-page-link {
+  background: #00ff00;
+  color: #000;
+  border: 1px solid #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+/* Kiểu cho bảng responsive */
+.table-responsive {
+  overflow-x: auto;
+}
+a.navbar-brand.neon-text {
+    font-size: 1.4rem !important; /* Đổi thành 1.0rem nếu vẫn thấy to */
+}
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+/* Sửa lại class auth-card hiện tại của bạn thành thế này */
+.auth-card {
+    background: #1a1a1a;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 15px #00ff00;
+    transition: transform 0.3s ease;
+    width: 100%;           /* Thêm dòng này */
+    max-width: 500px;      /* Thêm dòng này để form không bị khổng lồ */
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 12px;
+    background-color: #00ff00;
+    color: #000000;
+    font-weight: bold;
+    border: 2px solid #00ff00;
+    border-radius: 6px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.btn-auth:hover {
+    background-color: #000000;
+    color: #00ff00;
+    box-shadow: 0 0 15px #00ff00;
+}

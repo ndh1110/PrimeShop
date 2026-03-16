@@ -1,0 +1,53 @@
+@model IEnumerable<_1298_DUYHUNG.Models.Category>
+@{
+    ViewData["Title"] = "Danh Mục Sản Phẩm";
+}
+<section class="py-2">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="neon-text">Danh Mục Sản Phẩm</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach (var item in Model)
+            {
+                <div class="col mb-5">
+                    <div class="category-card">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        <a class="btn btn-neon" asp-action="ProductsByCategory" asp-route-id="@item.Id">Xem Sản Phẩm</a>
+                    </div>
+                </div>
+            }
+            <!-- Nút "Sản phẩm khác" -->
+            <div class="col mb-5">
+                <div class="category-card">
+                    <h5 class="card-title">Sản phẩm khác</h5>
+                    <a class="btn btn-neon" asp-action="OtherCategories">Xem Sản Phẩm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .neon-text {
+        color: #00FF00;
+        text-shadow: 0 0 10px #00FF00;
+    }
+
+    .category-card {
+        background-color: #2A2A2A;
+        border: 1px solid #00FF00;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 15px #00FF00;
+    }
+
+    .category-card .card-title {
+        color: #00FF00;
+        margin: 10px 0;
+    }
+</style>

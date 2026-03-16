@@ -1,0 +1,91 @@
+@{
+    ViewData["Title"] = "Trang Chủ";
+}
+
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+
+    <div class="main-content">
+        <div class="text-content">
+            <h1 class="neon-text">HƯNG | RAZER</h1>
+            <p class="tagline">GAMING IN STYLE</p>
+        </div>
+
+        <div class="action-buttons">
+            <a asp-controller="Product" asp-action="Index" class="btn btn-razer">
+                Xem Sản Phẩm
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+
+.hero-section{
+    position:relative;
+    min-height:80vh;
+    background:url('/images/banner_trang_chu.jpg') center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-overlay{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.65);
+}
+
+.main-content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+}
+
+.neon-text{
+    font-size:3.5rem;
+    color:#00ff00;
+    text-shadow:
+    0 0 5px #00ff00,
+    0 0 10px #00ff00,
+    0 0 20px #00ff00,
+    0 0 40px #00ff00;
+}
+
+.text-content {
+    margin-top: -135px; /* Số âm sẽ kéo ngược khối chữ lên trên */
+}
+
+.tagline{
+    font-size:1.6rem;
+    color:white;
+    letter-spacing:2px;
+    margin-top:10px;
+}
+
+.action-buttons{
+    margin-top:200px;
+}
+
+.btn-razer{
+    background:#00ff00;
+    color:black;
+    padding:12px 30px;
+    border-radius:6px;
+    font-weight:bold;
+    text-transform:uppercase;
+    border:2px solid #00ff00;
+    transition:0.3s;
+}
+
+.btn-razer:hover{
+    background:transparent;
+    color:#00ff00;
+    box-shadow:0 0 15px #00ff00;
+    transform:scale(1.05);
+}
+
+</style>
