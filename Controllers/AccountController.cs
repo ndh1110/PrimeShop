@@ -27,9 +27,10 @@ namespace _1298_DUYHUNG.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(string username, string password, string hcaptchaResponse)
+        public async Task<IActionResult> Login(string username, string password, string hcaptchaResponse = "")
         {
-            if (!await VerifyCaptcha(hcaptchaResponse))
+            // Make hCaptcha optional - skip verification if not provided
+            if (!string.IsNullOrEmpty(hcaptchaResponse) && !await VerifyCaptcha(hcaptchaResponse))
             {
                 ModelState.AddModelError("", "Captcha không hợp lệ.");
                 return View();
@@ -58,7 +59,7 @@ namespace _1298_DUYHUNG.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterViewModel model, string hcaptchaResponse)
+        public async Task<IActionResult> Register(RegisterViewModel model, string hcaptchaResponse = "")
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +93,7 @@ namespace _1298_DUYHUNG.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private async Task<bool> VerifyCaptcha(string captchaResponse)
+        protected virtual async Task<bool> VerifyCaptcha(string captchaResponse)
         {
             using var client = new HttpClient();
             var response = await client.PostAsync("https://hcaptcha.com/siteverify", new FormUrlEncodedContent(new[]
